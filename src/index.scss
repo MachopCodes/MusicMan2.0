@@ -1,1 +1,24 @@
 @import '~bootstrap/scss/bootstrap';
+
+#root {
+  background: rgb(6,97,60);
+  background: linear-gradient(90deg, rgba(6,97,60,1) 0%, rgba(125,230,143,1) 60%, rgba(76,143,116,1) 100%);
+}
+
+.wallpaper {
+  background-image: url('./home.PNG');
+  height: 100%;
+  background-size: 100px;
+  padding: 1px 5rem 100rem 5rem;
+  background-position: center;
+  background-repeat: repeat;
+  opacity: .6;
+}
+
+.app-name {
+  color: #90EE90;
+  font-size: 30px;
+  display: inline-flex;
+  margin-left: 15px;
+  text-shadow: 1px 1px #90EE90;
+}

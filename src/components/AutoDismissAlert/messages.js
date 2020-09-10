@@ -5,5 +5,8 @@ export default {
   signInFailure: 'Failed to sign in. Check your email and password and try again.',
   signOutSuccess: 'Come back soon!',
   changePasswordSuccess: 'Password changed successfully!',
-  changePasswordFailure: 'Failed to change passwords. Check your old password and try again.'
+  changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
+  createProfileSuccuess: 'Successfully created a profile for other views to see',
+  createProfileFailure: 'Profile creation failure',
+  indexProfileFailure: 'Could not find profile'
 }
