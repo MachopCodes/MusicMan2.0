@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { createProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
 
@@ -28,6 +28,7 @@ const CreateProfile = props => {
           message: messages.createProfileSuccuess,
           variant: 'success'
         })
+        props.history.push('/')
       })
       .catch(error => {
         props.msgAlert({
@@ -39,80 +40,138 @@ const CreateProfile = props => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="name">
-        <Form.Label>name</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="name"
-          value={profile.name}
-          onChange={handleChange}
-          placeholder="Enter Name"
-        />
-      </Form.Group>
-      <Form.Group controlId="contact">
-        <Form.Label>Contact</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="contact"
-          value={profile.contact}
-          onChange={handleChange}
-          placeholder="Enter Contact"
-        />
-      </Form.Group>
-      <Form.Group controlId="location">
-        <Form.Label>location</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="location"
-          value={profile.location}
-          onChange={handleChange}
-          placeholder="Enter location"
-        />
-      </Form.Group>
-      <Form.Group controlId="instruments">
-        <Form.Label>instruments</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="instruments"
-          value={profile.instruments}
-          onChange={handleChange}
-          placeholder="Enter instruments"
-        />
-      </Form.Group>
-      <Form.Group controlId="interests">
-        <Form.Label>interests</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="interests"
-          value={profile.interests}
-          onChange={handleChange}
-          placeholder="Enter interests"
-        />
-      </Form.Group>
-      <Form.Group controlId="blurb">
-        <Form.Label>blurb</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          name="blurb"
-          value={profile.blurb}
-          onChange={handleChange}
-          placeholder="Enter blurb"
-        />
-      </Form.Group>
-      <Button
-        type="Submit"
-        variant="dark"
-        className="mr-auto">
-        Submit
-      </Button>
-    </Form>
+    <section className="wallpaper container text-light">
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Form.Group controlId="name">
+              <Form.Label>name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="name"
+                value={profile.name}
+                onChange={handleChange}
+                placeholder="Enter Name"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="contact">
+              <Form.Label>Contact</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="contact"
+                value={profile.contact}
+                onChange={handleChange}
+                placeholder="Enter Contact"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="location">
+              <Form.Label>location</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="location"
+                value={profile.location}
+                onChange={handleChange}
+                placeholder="Enter location"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group controlId="instruments">
+              <Form.Label>Instrument</Form.Label>
+              <Form.Control required as="select" name="instruments" onChange={handleChange}>
+                <option></option>
+                <option>Accordion</option>
+                <option>Bagpipes</option>
+                <option>Banjo</option>
+                <option>Bass guitar</option>
+                <option>Bassoon</option>
+                <option>Bongo</option>
+                <option>Cello</option>
+                <option>Clarinet</option>
+                <option>Didgeridoo</option>
+                <option>Drum kit</option>
+                <option>Euphonium</option>
+                <option>Fiddle</option>
+                <option>Flute</option>
+                <option>French horn</option>
+                <option>Guitar</option>
+                <option>Harmonica</option>
+                <option>Harp</option>
+                <option>Mandolin</option>
+                <option>Marimba</option>
+                <option>Oboe</option>
+                <option>Ocarina</option>
+                <option>Organ</option>
+                <option>Pan Pipes</option>
+                <option>Piano</option>
+                <option>Piccolo</option>
+                <option>Recorder</option>
+                <option>Saxophone</option>
+                <option>Sitar</option>
+                <option>Singing</option>
+                <option>Synthesizer</option>
+                <option>Tabla</option>
+                <option>Timpani</option>
+                <option>Trombone</option>
+                <option>Trumpet</option>
+                <option>Theremin</option>
+                <option>Tuba</option>
+                <option>Ukulele</option>
+                <option>Viola</option>
+                <option>Violin</option>
+                <option>Xylophone</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="interests">
+              <Form.Label>Interest</Form.Label>
+              <Form.Control required as="select" name="interests" onChange={handleChange}>
+                <option></option>
+                <option>Lessons</option>
+                <option>Jams</option>
+                <option>Gigs</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group controlId="blurb">
+              <Form.Label>blurb</Form.Label>
+              <Form.Control
+                required
+                as="textarea"
+                name="blurb"
+                rows="3"
+                value={profile.blurb}
+                onChange={handleChange}
+                placeholder="Enter blurb"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button
+              type="Submit"
+              variant="dark"
+              className="mr-auto">
+              Submit
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    </section>
   )
 }
 

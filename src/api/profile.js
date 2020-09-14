@@ -6,7 +6,7 @@ export const createProfile = (data, token) => {
     method: 'POST',
     url: apiUrl + '/profiles',
     headers: {
-      'Authorization': `Token token=${token}`
+      'Authorization': 'Token token=' + token
     },
     data
   })
@@ -21,5 +21,15 @@ export const editProfile = (data, id, token) => {
       'Authorization': 'Token token=' + token
     },
     data
+  })
+}
+
+export const deleteProfile = (id, token) => {
+  return axios({
+    url: apiUrl + '/profiles/' + id,
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Token token=' + token
+    }
   })
 }

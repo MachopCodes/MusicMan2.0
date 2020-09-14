@@ -2,29 +2,19 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import messages from '../AutoDismissAlert/messages'
-import apiUrl from '../../apiConfig'
-import axios from 'axios'
+import { deleteProfile } from '../../api/profile'
 
 const DeleteProfile = props => {
-  // console.log('props in delete profile are: ', props)
-  const deleteProfile = () => {
-    return axios({
-      url: apiUrl + `/profiles/${props.match.params.id}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-  }
+  console.log('props in delete profile are: ', props)
   const handleSubmit = e => {
     e.preventDefault()
-    deleteProfile()
+    deleteProfile(props.match.params.id, props.user.token)
       .then(() => props.msgAlert({
         heading: 'Delete Success',
         message: messages.profileDeleteSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => props.history.push('/'))
       .catch(err => props.msgAlert({
         heading: 'Failed to delete: ' + err.message,
         message: messages.profileDeleteFailure,
