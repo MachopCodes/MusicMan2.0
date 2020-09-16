@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Container, Row, Col } from 'react-bootstrap'
 import ProfileCard from './ProfileCards'
+import City from './Form/City'
+import Instruments from './Form/Instruments'
+import Interests from './Form/Interests'
+import State from './Form/State'
 // import messages from '../AutoDismissAlert/messages'
 
 const Search = props => {
   const [data, setData] = useState()
-  const [search, setSearch] = useState({
-    location: '',
+  const [profile, setProfile] = useState({
     instrument: '',
-    interest: ''
+    interest: '',
+    city: '',
+    state: ''
   })
 
   const handleChange = e => {
     e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
-    setSearch({ ...search, ...updatedField })
+    setProfile({ ...profile, ...updatedField })
   }
 
   const handleSubmit = e => {
@@ -25,7 +30,7 @@ const Search = props => {
       const response = await axios({
         method: 'GET',
         url: apiUrl + '/profiles',
-        params: { search }
+        params: { profile }
       })
       setData(await response.data)
     }
@@ -36,79 +41,36 @@ const Search = props => {
   !data
     ? jsx =
     <section className="container text-light">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="instrument">
-          <Form.Label>Instrument</Form.Label>
-          <Form.Control as="select" name="instrument" onChange={handleChange}>
-            <option>Select Instrument</option>
-            <option>Accordion</option>
-            <option>Bagpipes</option>
-            <option>Banjo</option>
-            <option>Bass guitar</option>
-            <option>Bassoon</option>
-            <option>Bongo</option>
-            <option>Cello</option>
-            <option>Clarinet</option>
-            <option>Didgeridoo</option>
-            <option>Drum kit</option>
-            <option>Euphonium</option>
-            <option>Fiddle</option>
-            <option>Flute</option>
-            <option>French horn</option>
-            <option>Guitar</option>
-            <option>Harmonica</option>
-            <option>Harp</option>
-            <option>Mandolin</option>
-            <option>Marimba</option>
-            <option>Oboe</option>
-            <option>Ocarina</option>
-            <option>Organ</option>
-            <option>Pan Pipes</option>
-            <option>Piano</option>
-            <option>Piccolo</option>
-            <option>Recorder</option>
-            <option>Saxophone</option>
-            <option>Sitar</option>
-            <option>Singing</option>
-            <option>Synthesizer</option>
-            <option>Tabla</option>
-            <option>Timpani</option>
-            <option>Trombone</option>
-            <option>Trumpet</option>
-            <option>Theremin</option>
-            <option>Tuba</option>
-            <option>Ukulele</option>
-            <option>Viola</option>
-            <option>Violin</option>
-            <option>Xylophone</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="interest">
-          <Form.Label>Interest</Form.Label>
-          <Form.Control as="select" name="interest" onChange={handleChange}>
-            <option>Select Interest</option>
-            <option>Lessons</option>
-            <option>Jams</option>
-            <option>Gigs</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="location">
-          <Form.Label>location</Form.Label>
-          <Form.Control
-            type="text"
-            name="location"
-            value={search.location}
-            onChange={handleChange}
-            placeholder="Enter location"
-          />
-        </Form.Group>
-        <Button
-          type="Submit"
-          variant="dark"
-          className="mr-auto">
-          Submit
-        </Button>
-      </Form>
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <Instruments change={handleChange}/>
+            </Col>
+            <Col>
+              <Interests change={handleChange}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <City change={handleChange} city={profile.city}/>
+            </Col>
+            <Col>
+              <State change={handleChange} state={profile.state}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                type="Submit"
+                variant="dark"
+                className="mr-auto">
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </section>
     : jsx = <ProfileCard {...props} list={data.profiles} />
   return (jsx)
