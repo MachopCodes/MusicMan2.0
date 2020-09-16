@@ -4,12 +4,12 @@ import Search from '../Profile/Search'
 const Home = props => {
   const unauthenticatedOptions = (
     <Fragment>
-      <Search/>
+      <Search {...props}/>
     </Fragment>
   )
   const authenticatedOptions = (
     <Fragment>
-      <Search/>
+      <Search {...props}/>
     </Fragment>
   )
 

@@ -5,13 +5,12 @@ import { Button, Form } from 'react-bootstrap'
 import DeleteProfile from './DeleteProfile'
 
 const EditProfile = props => {
-  console.log('props are: ', props)
   const [profile, setProfile] = useState({
     name: props.profile.name,
     contact: props.profile.contact,
     location: props.profile.location,
-    instruments: props.profile.instruments,
-    interests: props.profile.interests,
+    instrument: props.profile.instruments,
+    interest: props.profile.interests,
     blurb: props.profile.blurb,
     id: props.profile._id
   })
@@ -79,24 +78,24 @@ const EditProfile = props => {
             placeholder="Enter location"
           />
         </Form.Group>
-        <Form.Group controlId="instruments">
+        <Form.Group controlId="instrument">
           <Form.Label>instruments</Form.Label>
           <Form.Control
             required
             type="text"
-            name="instruments"
-            value={profile.instruments}
+            name="instrument"
+            value={profile.instrument}
             onChange={handleChange}
-            placeholder="Enter instruments"
+            placeholder="Enter instrument"
           />
         </Form.Group>
-        <Form.Group controlId="interests">
-          <Form.Label>interests</Form.Label>
+        <Form.Group controlId="interest">
+          <Form.Label>interest</Form.Label>
           <Form.Control
             required
             type="text"
-            name="interests"
-            value={profile.interests}
+            name="interest"
+            value={profile.interest}
             onChange={handleChange}
             placeholder="Enter interests"
           />

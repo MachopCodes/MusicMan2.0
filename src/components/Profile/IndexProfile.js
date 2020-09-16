@@ -24,7 +24,6 @@ const IndexProfile = props => {
     ? jsx = <h1>loading...</h1>
     : jsx = <ProfileCard
       {...props}
-      setData={setData}
       list={data.profiles} />
   return (
     <section className="wallpaper container">{jsx}</section>

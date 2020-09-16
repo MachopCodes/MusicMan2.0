@@ -8,8 +8,8 @@ const CreateProfile = props => {
     name: '',
     contact: '',
     location: '',
-    instruments: '',
-    interests: '',
+    instrument: '',
+    interest: '',
     blurb: ''
   })
 
@@ -85,9 +85,9 @@ const CreateProfile = props => {
         </Row>
         <Row>
           <Col>
-            <Form.Group controlId="instruments">
+            <Form.Group controlId="instrument">
               <Form.Label>Instrument</Form.Label>
-              <Form.Control required as="select" name="instruments" onChange={handleChange}>
+              <Form.Control required as="select" name="instrument" onChange={handleChange}>
                 <option></option>
                 <option>Accordion</option>
                 <option>Bagpipes</option>
@@ -133,7 +133,7 @@ const CreateProfile = props => {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="interests">
+            <Form.Group controlId="interest">
               <Form.Label>Interest</Form.Label>
               <Form.Control required as="select" name="interests" onChange={handleChange}>
                 <option></option>
@@ -149,7 +149,6 @@ const CreateProfile = props => {
             <Form.Group controlId="blurb">
               <Form.Label>blurb</Form.Label>
               <Form.Control
-                required
                 as="textarea"
                 name="blurb"
                 rows="3"
