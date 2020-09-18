@@ -4,7 +4,6 @@ import { Form } from 'react-bootstrap'
 const Name = props => {
   return (
     <Form.Group controlId="name">
-      <Form.Label>Name</Form.Label>
       <Form.Control
         type="text"
         name="name"

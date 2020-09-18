@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import apiUrl from '../../apiConfig'
+import apiUrl from '../../api/config'
 import { Button, Form, Container, Row, Col } from 'react-bootstrap'
 import ProfileCard from './ProfileCards'
 import City from './Form/City'
@@ -40,7 +40,7 @@ const Search = props => {
   let jsx
   !data
     ? jsx =
-    <section className="container text-light">
+    <section>
       <Container>
         <Form onSubmit={handleSubmit}>
           <Row>

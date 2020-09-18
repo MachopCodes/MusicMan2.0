@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import apiUrl from '../../apiConfig'
+import apiUrl from '../../api/config'
 import EditProfile from './EditProfile'
 // import messages from '../AutoDismissAlert/messages'
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { createProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
 import Name from './Form/Name'
@@ -46,40 +46,42 @@ const CreateProfile = props => {
   }
 
   return (
-    <section className="wallpaper container text-light">
-      <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col>
-            <Name name={profile.name} change={handleChange}/>
-          </Col>
-          <Col>
-            <City city={profile.city} change={handleChange}/>
-          </Col>
-          <Col>
-            <State state={profile.state} change={handleChange}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Instruments change={handleChange}/>
-          </Col>
-          <Col>
-            <Interests change={handleChange}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Blurb blurb={profile.blurb} change={handleChange}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button type="Submit" variant="dark" className="mr-auto">
-              Submit
-            </Button>
-          </Col>
-        </Row>
-      </Form>
+    <section className="text-light">
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <Name name={profile.name} change={handleChange}/>
+            </Col>
+            <Col>
+              <City city={profile.city} change={handleChange}/>
+            </Col>
+            <Col>
+              <State state={profile.state} change={handleChange}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Instruments change={handleChange}/>
+            </Col>
+            <Col>
+              <Interests change={handleChange}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Blurb blurb={profile.blurb} change={handleChange}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button type="Submit" variant="dark" className="mr-auto">
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </section>
   )
 }

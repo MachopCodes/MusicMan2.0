@@ -1,17 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
-import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
-import Home from '../Layout/Home'
-import Header from '../Layout/Header'
-import SignUp from '../Auth/SignUp'
-import SignIn from '../Auth/SignIn'
-import SignOut from '../Auth/SignOut'
-import ChangePassword from '../Auth/ChangePassword'
-import CreateProfile from '../Profile/CreateProfile'
-import IndexProfile from '../Profile/IndexProfile'
-import ShowProfile from '../Profile/ShowProfile'
+import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
+import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
+import Home from './Layout/Home'
+import Header from './Layout/Header'
+import SignUp from './Auth/SignUp'
+import SignIn from './Auth/SignIn'
+import SignOut from './Auth/SignOut'
+import ChangePassword from './Auth/ChangePassword'
+import CreateProfile from './Profile/CreateProfile'
+import IndexProfile from './Profile/IndexProfile'
+import ShowProfile from './Profile/ShowProfile'
 
 class App extends Component {
   constructor () {

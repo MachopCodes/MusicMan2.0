@@ -14,7 +14,7 @@ const Home = props => {
   )
 
   return (
-    <section className="wallpaper">
+    <section>
       { props.user ? authenticatedOptions : unauthenticatedOptions }
     </section>
   )

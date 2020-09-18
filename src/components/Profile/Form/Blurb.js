@@ -4,7 +4,6 @@ import { Form } from 'react-bootstrap'
 const Blurb = props => {
   return (
     <Form.Group controlId="blurb">
-      <Form.Label>Blurb</Form.Label>
       <Form.Control
         as="textarea"
         name="blurb"

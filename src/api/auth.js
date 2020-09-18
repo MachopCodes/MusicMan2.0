@@ -1,4 +1,4 @@
-import apiUrl from '../apiConfig'
+import apiUrl from './config'
 import axios from 'axios'
 
 export const signUp = credentials => {
