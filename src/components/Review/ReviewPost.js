@@ -2,15 +2,17 @@ import React, { Fragment, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
 import { createReview } from '../../api/review'
+import StarRating from './StarRating'
 
 const ReviewPost = props => {
-  const [review, setReview] = useState({
-    content: '',
-    profileId: props.profileId
-  })
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const [review, setReview] = useState({
+    content: '',
+    rating: null,
+    profileId: props.profileId
+  })
 
   const handleChange = e => {
     e.preventDefault()
@@ -47,14 +49,9 @@ const ReviewPost = props => {
           </Modal.Header>
           <Form onSubmit={handleSubmit}>
             <Modal.Body>
-              <Form.Group controlId="title">
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={review.title}
-                  onChange={handleChange}
-                  placeholder="Review Title"/>
-              </Form.Group>
+              <StarRating
+                rating={review}
+                setReview={setReview} />
               <Form.Group controlId="content">
                 <Form.Control
                   as="textarea"

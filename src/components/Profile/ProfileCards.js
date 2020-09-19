@@ -2,9 +2,10 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Card, Button, Accordion } from 'react-bootstrap'
 import ReviewPost from '../Review/ReviewPost'
+import ReviewScore from '../Review/ReviewScore'
 
 const ProfileCard = props => {
-  return (
+  const jsx = (
     <section>
       {props.list.map(p => (
         <Card key={p._id}>
@@ -19,14 +20,12 @@ const ProfileCard = props => {
             <Accordion>
               <Card>
                 <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    {p.reviews.length} reviews
-                  </Accordion.Toggle>
+                  <ReviewScore reviews={p.reviews}/>
                 </Card.Header>
                 {p.reviews.map(review => (
                   <Accordion.Collapse key={review._id} eventKey="0">
                     <Card><Card.Body><Card.Text>
-                      {review.content}
+                      {review.content} {review.rating}
                     </Card.Text></Card.Body></Card>
                   </Accordion.Collapse>
                 ))}
@@ -45,6 +44,7 @@ const ProfileCard = props => {
       ))}
     </section>
   )
+  return jsx
 }
 
 export default withRouter(ProfileCard)

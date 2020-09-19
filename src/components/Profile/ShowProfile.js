@@ -5,7 +5,6 @@ import EditProfile from './EditProfile'
 // import messages from '../AutoDismissAlert/messages'
 
 const ShowProfile = props => {
-  console.log('props in show prof are: ', props)
   const [data, setData] = useState('')
   const fetchData = async () => {
     const response = await axios({

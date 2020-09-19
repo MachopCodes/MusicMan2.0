@@ -5,7 +5,6 @@ import messages from '../AutoDismissAlert/messages'
 import { deleteProfile } from '../../api/profile'
 
 const DeleteProfile = props => {
-  console.log('props in delete profile are: ', props)
   const handleSubmit = e => {
     e.preventDefault()
     deleteProfile(props.match.params.id, props.user.token)
