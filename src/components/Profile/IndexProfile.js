@@ -24,11 +24,12 @@ const IndexProfile = props => {
   }, [])
 
   let jsx
-  !data ? jsx = <h1>loading...</h1>
-    : jsx = <ProfileCard
-      {...props}
+  !data
+    ? jsx = <h1>loading...</h1>
+    : jsx = <ProfileCard {...props}
       list={data.profiles}
-      msgAlert={props.msgAlert} />
+      msgAlert={props.msgAlert}
+    />
   return (<section className="container">{jsx}</section>)
 }
 

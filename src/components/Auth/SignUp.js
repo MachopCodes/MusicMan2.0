@@ -12,6 +12,7 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
+      userName: '',
       password: '',
       passwordConfirmation: ''
     }
@@ -46,7 +47,7 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
+    const { email, userName, password, passwordConfirmation } = this.state
 
     return (
       <section className="wallpaper">
@@ -62,6 +63,16 @@ class SignUp extends Component {
                     name="email"
                     value={email}
                     placeholder="Enter email"
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="userName">
+                  <Form.Control
+                    required
+                    type="text"
+                    name="userName"
+                    value={userName}
+                    placeholder="Enter User Name"
                     onChange={this.handleChange}
                   />
                 </Form.Group>

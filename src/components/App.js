@@ -12,6 +12,7 @@ import ChangePassword from './Auth/ChangePassword'
 import CreateProfile from './Profile/CreateProfile'
 import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
+import Inbox from './Messages/Inbox'
 
 class App extends Component {
   constructor () {
@@ -70,6 +71,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/profiles/:id' render={(props) => (
             <ShowProfile {...props} msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/messages/' render={(props) => (
+            <Inbox {...props} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
