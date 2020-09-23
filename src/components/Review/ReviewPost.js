@@ -3,7 +3,7 @@ import { Button, Form, Modal, Container, Row, Col } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
 import { createReview } from '../../api/review'
 import StarRating from './StarRating'
-import PostMessage from '../Messages/PostMessage'
+import SendMessage from '../Messages/SendMessage'
 
 const ReviewPost = props => {
   const [show, setShow] = useState(false)
@@ -48,7 +48,10 @@ const ReviewPost = props => {
         <Container>
           <Row>
             <Col>
-              <PostMessage owner={props.profile.owner} msgAlert={props.msgAlert} />
+              <SendMessage
+                user={props.user}
+                owner={props.profile.owner}
+                msgAlert={props.msgAlert} />
             </Col>
             <Col>
               <Button variant="primary" onClick={handleShow}>Post Review</Button>

@@ -50,28 +50,16 @@ const CreateProfile = props => {
       <Container>
         <Form onSubmit={handleSubmit}>
           <Row>
-            <Col>
-              <Name name={profile.name} change={handleChange}/>
-            </Col>
-            <Col>
-              <City city={profile.city} change={handleChange}/>
-            </Col>
-            <Col>
-              <State state={profile.state} change={handleChange}/>
-            </Col>
+            <Col><Name name={profile.name} change={handleChange}/></Col>
+            <Col><City city={profile.city} change={handleChange}/></Col>
+            <Col><State state={profile.state} change={handleChange}/></Col>
           </Row>
           <Row>
-            <Col>
-              <Instruments change={handleChange}/>
-            </Col>
-            <Col>
-              <Interests change={handleChange}/>
-            </Col>
+            <Col><Instruments change={handleChange}/></Col>
+            <Col><Interests change={handleChange}/></Col>
           </Row>
           <Row>
-            <Col>
-              <Blurb blurb={profile.blurb} change={handleChange}/>
-            </Col>
+            <Col><Blurb blurb={profile.blurb} change={handleChange}/></Col>
           </Row>
           <Row>
             <Col>

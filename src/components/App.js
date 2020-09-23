@@ -72,7 +72,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/profiles/:id' render={(props) => (
             <ShowProfile {...props} msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/messages/' render={(props) => (
+          <AuthenticatedRoute user={user} path='/messages' render={(props) => (
             <Inbox {...props} msgAlert={this.msgAlert} user={user} />
           )} />
         </main>

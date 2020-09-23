@@ -3,14 +3,15 @@ import { Modal, Form, Container, Button } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
 import { postMessage } from '../../api/message'
 
-const PostMessage = props => {
+const SendMessage = props => {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [message, setMessage] = useState({
-    to: '',
     title: '',
-    body: ''
+    body: '',
+    to: props.owner._id,
+    from: props.user._id
   })
 
   const handleChange = e => {
@@ -21,7 +22,7 @@ const PostMessage = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    postMessage(message, props.user.token)
+    postMessage(message, props.user)
       .then(() => {
         props.msgAlert({
           heading: 'Message Sent!',
@@ -37,20 +38,11 @@ const PostMessage = props => {
       <Button variant="success" onClick={handleShow}>Send Message</Button>
       <Container>
         <Modal centered show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Send Message</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="to">
-                <Form.Control
-                  type="text"
-                  name="to"
-                  value={message.to}
-                  onChange={handleChange}
-                  placeholder="to:"
-                />
-              </Form.Group>
+          <Form onSubmit={handleSubmit}>
+            <Modal.Header closeButton>
+              <Modal.Title>Send Message to {props.owner.userName}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <Form.Group controlId="title">
                 <Form.Control
                   type="text"
@@ -69,17 +61,17 @@ const PostMessage = props => {
                   placeholder="body:"
                 />
               </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button type="Submit" variant="dark" className="mr-auto">
-              Send
-            </Button>
-          </Modal.Footer>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button type="Submit" variant="dark" className="mr-auto">
+                Send
+              </Button>
+            </Modal.Footer>
+          </Form>
         </Modal>
       </Container>
     </Fragment>
   )
 }
 
-export default PostMessage
+export default SendMessage
