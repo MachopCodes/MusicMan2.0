@@ -19,12 +19,12 @@ const Reply = props => {
   const handleChange = e => {
     e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
-    setBody({ body, updatedField })
+    setMessage({ ...message, ...updatedField })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    reply(body, props.messsage, props.user)
+    reply(message, props.messsage, props.user)
       .then(() => {
         props.msgAlert({
           heading: 'Message Sent!',
@@ -50,7 +50,7 @@ const Reply = props => {
                 <Form.Control
                   type="text"
                   name="body"
-                  value={body}
+                  value={message.body}
                   onChange={handleChange}
                   placeholder="body:"
                 />
