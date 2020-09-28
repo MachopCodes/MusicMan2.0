@@ -13,6 +13,7 @@ import CreateProfile from './Profile/CreateProfile'
 import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
 import Inbox from './Messages/Inbox'
+import SocketLoader from './Socket/SocketLoader'
 
 class App extends Component {
   constructor () {
@@ -49,6 +50,8 @@ class App extends Component {
           />
         ))}
         <main className="container">
+          <Route exact path='/socket' render={(props) => (
+            <SocketLoader user={user} msgAlert={this.msgAlert}/>)} />
           <Route exact path='/' render={(props) => (
             <Home user={user} msgAlert={this.msgAlert}/>)} />
           <Route path='/sign-up' render={() => (
