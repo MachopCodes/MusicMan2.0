@@ -30,7 +30,7 @@ const IndexProfile = props => {
       list={data.profiles}
       msgAlert={props.msgAlert}
     />
-  return (<section className="container">{jsx}</section>)
+  return (<div className="container">{jsx}</div>)
 }
 
 export default IndexProfile

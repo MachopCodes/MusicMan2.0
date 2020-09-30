@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Form, Modal, Container, Row, Col } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
 import { createReview } from '../../api/review'
 import StarRating from './StarRating'
-import SendMessage from '../Messages/SendMessage'
 
 const ReviewPost = props => {
   const [show, setShow] = useState(false)
@@ -48,10 +48,9 @@ const ReviewPost = props => {
         <Container>
           <Row>
             <Col>
-              <SendMessage
-                user={props.user}
-                owner={props.profile.owner}
-                msgAlert={props.msgAlert} />
+              <Link to={`/chat?name=${props.user.userName}&room=${props.profile.name}`}>
+                <Button variant="primary">Send this User a Message</Button>
+              </Link>
             </Col>
             <Col>
               <Button variant="primary" onClick={handleShow}>Post Review</Button>

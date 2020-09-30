@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import apiUrl from '../../api/config'
-import { Button, Form, Container, Row, Col } from 'react-bootstrap'
+import { Button, Form, Row, Col } from 'react-bootstrap'
 import ProfileCard from './ProfileCards'
 import City from './Form/City'
 import Instruments from './Form/Instruments'
@@ -41,36 +41,34 @@ const Search = props => {
   !data
     ? jsx =
     <section>
-      <Container>
-        <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col>
-              <Instruments change={handleChange}/>
-            </Col>
-            <Col>
-              <Interests change={handleChange}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <City change={handleChange} city={profile.city}/>
-            </Col>
-            <Col>
-              <State change={handleChange} state={profile.state}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button
-                type="Submit"
-                variant="dark"
-                className="mr-auto">
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Instruments change={handleChange}/>
+          </Col>
+          <Col>
+            <Interests change={handleChange}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <City change={handleChange} city={profile.city}/>
+          </Col>
+          <Col>
+            <State change={handleChange} state={profile.state}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button
+              type="Submit"
+              variant="dark"
+              className="mr-auto">
+              Submit
+            </Button>
+          </Col>
+        </Row>
+      </Form>
     </section>
     : jsx = <ProfileCard {...props} list={data.profiles} />
   return (jsx)

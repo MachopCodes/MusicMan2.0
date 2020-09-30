@@ -8,6 +8,7 @@ const authenticatedOptions = (
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
     <Nav.Link href="#profiles">Create Profile</Nav.Link>
     <Nav.Link href="#messages">Inbox</Nav.Link>
+    <Nav.Link href="#socket">socket test</Nav.Link>
   </Fragment>
 )
 
@@ -15,7 +16,6 @@ const unauthenticatedOptions = (
   <Fragment>
     <Nav.Link href="#sign-up">Sign Up</Nav.Link>
     <Nav.Link href="#sign-in">Sign In</Nav.Link>
-    <Nav.Link href="#socket">socket test</Nav.Link>
   </Fragment>
 )
 
