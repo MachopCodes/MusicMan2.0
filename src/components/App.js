@@ -52,11 +52,14 @@ class App extends Component {
         ))}
         <main>
           <Route path='/socket' render={(props) => (
-            <Join user={user} msgAlert={this.msgAlert}/>)} />
+            <Join user={user} msgAlert={this.msgAlert}/>
+          )} />
           <Route path='/chat' render={(props) => (
-            <Chat {...props} user={user} msgAlert={this.msgAlert}/>)} />
+            <Chat {...props} user={user}/>
+          )} />
           <Route exact path='/' render={(props) => (
-            <Home user={user} msgAlert={this.msgAlert}/>)} />
+            <Home user={user} msgAlert={this.msgAlert}/>
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -64,7 +67,7 @@ class App extends Component {
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
           <Route user={user} path='/index' render={() => (
-            <IndexProfile msgAlert={this.msgAlert} user={user} />
+            <IndexProfile msgAlert={this.msgAlert} user={user} setRecipient={this.setRecipient} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />

@@ -6,6 +6,7 @@ import TextContainer from '../TextContainer/TextContainer'
 import Messages from '../Messages/Messages'
 import InfoBar from '../InfoBar/InfoBar'
 import Input from '../Input/Input'
+import { postMessageTo, postMessageFrom } from '../../../api/message'
 
 import './Chat.css'
 
@@ -13,35 +14,25 @@ const ENDPOINT = 'http://localhost:4741'
 
 let socket
 
-const Chat = ({ location }) => {
-  const [name, setName] = useState('')
-  const [room, setRoom] = useState('')
+const Chat = ({ user, location }) => {
   const [opers, setOpers] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
-
-  console.log('messages are: ', messages)
-  console.log('message is: ', message)
+  const { name, room, to } = queryString.parse(location.search)
 
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search)
-
     socket = io(ENDPOINT)
 
-    setRoom(room)
-    setName(name)
-
     socket.emit('join', { name, room }, (error) => {
-      if (error) {
-        alert(error)
-      }
+      if (error) { alert(error) }
     })
   }, [ENDPOINT, location.search])
 
   useEffect(() => {
     socket.on('message', message => {
-      console.log('in socket on message is :', message)
       setMessages(messages => [ ...messages, message ])
+      postMessageTo(message, user, to).then(postMessageFrom(message, user, to))
+      console.log('useEffect triggered messages are: ', JSON.stringify(user.messages))
     })
 
     socket.on('roomData', ({ opers }) => {
@@ -53,7 +44,6 @@ const Chat = ({ location }) => {
     event.preventDefault()
 
     if (message) {
-      console.log('a message was sent!', message)
       socket.emit('sendMessage', message, () => setMessage(''))
     }
   }

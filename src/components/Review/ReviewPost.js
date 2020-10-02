@@ -48,12 +48,12 @@ const ReviewPost = props => {
         <Container>
           <Row>
             <Col>
-              <Link to={`/chat?name=${props.user.userName}&room=${props.profile.name}`}>
-                <Button variant="primary">Send this User a Message</Button>
+              <Link to={`/chat?name=${props.user.userName}&room=${props.profile.name}&to=${props.profile.owner._id}`}>
+                <Button variant="success">Message</Button>
               </Link>
             </Col>
             <Col>
-              <Button variant="primary" onClick={handleShow}>Post Review</Button>
+              <Button variant="primary" onClick={handleShow}>Review</Button>
               <Modal centered show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Post Review</Modal.Title>

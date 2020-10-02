@@ -58,6 +58,7 @@ const ProfileCard = props => {
                     ? <Link to={`/profiles/${p._id}`}>
                       <Button variant="success">Edit Profile</Button></Link>
                     : <ReviewPost
+                      {...props}
                       profile={p}
                       owner={p.owner}
                       reviews={p.reviews}

@@ -1,14 +1,33 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const postMessage = (data, user) => {
+export const postMessageFrom = (message, user, to) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/messages',
+    url: apiUrl + '/messagefrom',
     headers: {
       'Authorization': 'Token token=' + user.token
     },
-    data
+    data: {
+      to: to,
+      from: user._id,
+      text: message.text
+    }
+  })
+}
+
+export const postMessageTo = (message, user, to) => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/messageto',
+    headers: {
+      'Authorization': 'Token token=' + user.token
+    },
+    data: {
+      to: user._id,
+      from: to,
+      text: message.text
+    }
   })
 }
 

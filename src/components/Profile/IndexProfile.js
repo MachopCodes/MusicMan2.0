@@ -26,7 +26,8 @@ const IndexProfile = props => {
   let jsx
   !data
     ? jsx = <h1>loading...</h1>
-    : jsx = <ProfileCard {...props}
+    : jsx = <ProfileCard
+      {...props}
       list={data.profiles}
       msgAlert={props.msgAlert}
     />
