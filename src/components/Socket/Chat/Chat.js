@@ -14,25 +14,25 @@ const ENDPOINT = 'http://localhost:4741'
 
 let socket
 
-const Chat = ({ user, location }) => {
-  const [opers, setOpers] = useState('')
+const Chat = ({ user, location, setUser, opers, setOpers }) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const { name, room, to } = queryString.parse(location.search)
 
   useEffect(() => {
     socket = io(ENDPOINT)
-
     socket.emit('join', { name, room }, (error) => {
       if (error) { alert(error) }
     })
+    return () => socket.close()
   }, [ENDPOINT, location.search])
 
   useEffect(() => {
     socket.on('message', message => {
       setMessages(messages => [ ...messages, message ])
-      postMessageTo(message, user, to).then(postMessageFrom(message, user, to))
-      console.log('useEffect triggered messages are: ', JSON.stringify(user.messages))
+      postMessageTo(message, user, to)
+      postMessageFrom(message, user, to)
+        .then((res) => setUser(res.data))
     })
 
     socket.on('roomData', ({ opers }) => {
@@ -52,7 +52,7 @@ const Chat = ({ user, location }) => {
     <div className='outerContainer'>
       <div className='container'>
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
+        <Messages messages={messages} userMessages={user.messages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
       <TextContainer opers={opers}/>

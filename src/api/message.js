@@ -24,8 +24,8 @@ export const postMessageTo = (message, user, to) => {
       'Authorization': 'Token token=' + user.token
     },
     data: {
-      to: user._id,
-      from: to,
+      to: to,
+      from: user._id,
       text: message.text
     }
   })

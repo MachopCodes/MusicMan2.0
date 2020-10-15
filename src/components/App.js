@@ -21,6 +21,7 @@ class App extends Component {
     super()
     this.state = {
       user: null,
+      opers: [],
       profile: null,
       msgAlerts: []
     }
@@ -28,6 +29,9 @@ class App extends Component {
 
   setUser = user => this.setState({ user })
   clearUser = () => this.setState({ user: null })
+
+  setOpers = oper => this.setState([{ oper }])
+  clearOper = () => this.setState({ oper: [] })
 
   setProfile = profile => this.setState({ profile })
   clearProfile = () => this.setState({ profile: null })
@@ -37,7 +41,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, opers } = this.state
 
     return (
       <Fragment>
@@ -55,7 +59,7 @@ class App extends Component {
             <Join user={user} msgAlert={this.msgAlert}/>
           )} />
           <Route path='/chat' render={(props) => (
-            <Chat {...props} user={user}/>
+            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers}/>
           )} />
           <Route exact path='/' render={(props) => (
             <Home user={user} msgAlert={this.msgAlert}/>
