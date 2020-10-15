@@ -1,7 +1,8 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const postMessageFrom = (message, user, to) => {
+export const postMessageFrom = (message, user, to, room) => {
+  console.log(`message: ${message} user: ${user} to: ${to}`)
   return axios({
     method: 'POST',
     url: apiUrl + '/messagefrom',
@@ -9,14 +10,16 @@ export const postMessageFrom = (message, user, to) => {
       'Authorization': 'Token token=' + user.token
     },
     data: {
-      to: to,
-      from: user._id,
+      receiverName: room,
+      receiverId: to,
+      senderName: user.name,
+      senderId: user._id,
       text: message.text
     }
   })
 }
 
-export const postMessageTo = (message, user, to) => {
+export const postMessageTo = (message, user, to, room) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/messageto',
@@ -24,8 +27,10 @@ export const postMessageTo = (message, user, to) => {
       'Authorization': 'Token token=' + user.token
     },
     data: {
-      to: to,
-      from: user._id,
+      receiverName: room,
+      receiverId: to,
+      senderName: user.name,
+      senderId: user._id,
       text: message.text
     }
   })

@@ -1,18 +1,22 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { editProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Row, Col } from 'react-bootstrap'
 import DeleteProfile from './DeleteProfile'
+import Blurb from './Form/Blurb'
+import City from './Form/City'
+import Instruments from './Form/Instruments'
+import Interests from './Form/Interests'
+import State from './Form/State'
 
 const EditProfile = props => {
+  const { msgAlert, p, _id, user } = props
   const [profile, setProfile] = useState({
-    name: props.profile.name,
-    contact: props.profile.contact,
-    location: props.profile.location,
-    instrument: props.profile.instruments,
-    interest: props.profile.interests,
-    blurb: props.profile.blurb,
-    id: props.profile._id
+    city: p.city,
+    state: p.state,
+    instrument: p.instrument,
+    interest: p.interest,
+    blurb: p.blurb
   })
 
   const handleChange = e => {
@@ -23,10 +27,9 @@ const EditProfile = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    editProfile(profile, props._id, props.user.token)
+    editProfile(profile, _id, user.token)
       .then(() => {
-        console.log('success!! profile is: ', profile)
-        props.msgAlert({
+        msgAlert({
           heading: 'Edit Success',
           message: messages.editProfileSuccess,
           variant: 'success'
@@ -34,7 +37,7 @@ const EditProfile = props => {
         history.push('/')
       })
       .catch(error => {
-        props.msgAlert({
+        msgAlert({
           heading: 'Edit Failure: ' + error.message,
           message: messages.editProfileFailure,
           variant: 'danger'
@@ -43,83 +46,29 @@ const EditProfile = props => {
   }
 
   return (
-    <Fragment>
+    <section className="text-light">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="name">
-          <Form.Label>name</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="name"
-            value={profile.name}
-            onChange={handleChange}
-            placeholder="enter name"
-          />
-        </Form.Group>
-        <Form.Group controlId="contact">
-          <Form.Label>Contact</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="contact"
-            value={profile.contact}
-            onChange={handleChange}
-            placeholder="Enter Contact"
-          />
-        </Form.Group>
-        <Form.Group controlId="location">
-          <Form.Label>location</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="location"
-            value={profile.location}
-            onChange={handleChange}
-            placeholder="Enter location"
-          />
-        </Form.Group>
-        <Form.Group controlId="instrument">
-          <Form.Label>instruments</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="instrument"
-            value={profile.instrument}
-            onChange={handleChange}
-            placeholder="Enter instrument"
-          />
-        </Form.Group>
-        <Form.Group controlId="interest">
-          <Form.Label>interest</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="interest"
-            value={profile.interest}
-            onChange={handleChange}
-            placeholder="Enter interests"
-          />
-        </Form.Group>
-        <Form.Group controlId="blurb">
-          <Form.Label>blurb</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="blurb"
-            value={profile.blurb}
-            onChange={handleChange}
-            placeholder="Enter blurb"
-          />
-        </Form.Group>
-        <Button
-          type="Submit"
-          variant="dark"
-          className="mr-auto">
-          Submit
-        </Button>
+        <Row>
+          <Col><City city={profile.city} change={handleChange}/></Col>
+          <Col><State state={profile.state} change={handleChange}/></Col>
+        </Row>
+        <Row>
+          <Col><Instruments change={handleChange}/></Col>
+          <Col><Interests change={handleChange}/></Col>
+        </Row>
+        <Row>
+          <Col><Blurb blurb={profile.blurb} change={handleChange}/></Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button type="Submit" variant="dark" className="mr-auto">
+              Submit
+            </Button>
+          </Col>
+        </Row>
         <DeleteProfile {...props} />
       </Form>
-    </Fragment>
+    </section>
   )
 }
 

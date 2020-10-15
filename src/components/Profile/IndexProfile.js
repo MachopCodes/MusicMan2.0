@@ -23,14 +23,11 @@ const IndexProfile = props => {
     })
   }, [])
 
+  console.log('data: ', data)
   let jsx
   !data
     ? jsx = <h1>loading...</h1>
-    : jsx = <ProfileCard
-      {...props}
-      list={data.profiles}
-      msgAlert={props.msgAlert}
-    />
+    : jsx = <ProfileCard {...props} list={data.profiles} msgAlert={props.msgAlert} />
   return (<div className="container">{jsx}</div>)
 }
 

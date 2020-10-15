@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { createProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
-import Name from './Form/Name'
 import Blurb from './Form/Blurb'
 import City from './Form/City'
 import Instruments from './Form/Instruments'
@@ -11,7 +10,6 @@ import State from './Form/State'
 
 const CreateProfile = props => {
   const [profile, setProfile] = useState({
-    name: '',
     city: '',
     state: '',
     instrument: '',
@@ -49,7 +47,6 @@ const CreateProfile = props => {
     <section className="text-light">
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col><Name name={profile.name} change={handleChange}/></Col>
           <Col><City city={profile.city} change={handleChange}/></Col>
           <Col><State state={profile.state} change={handleChange}/></Col>
         </Row>

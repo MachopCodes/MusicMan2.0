@@ -7,7 +7,6 @@ import City from './Form/City'
 import Instruments from './Form/Instruments'
 import Interests from './Form/Interests'
 import State from './Form/State'
-// import messages from '../AutoDismissAlert/messages'
 
 const Search = props => {
   const [data, setData] = useState()
@@ -34,8 +33,7 @@ const Search = props => {
       })
       setData(await response.data)
     }
-    fetchData()
-      .catch((err) => console.log(err))
+    fetchData().catch((err) => console.log(err))
   }
   let jsx
   !data

@@ -30,8 +30,8 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
   useEffect(() => {
     socket.on('message', message => {
       setMessages(messages => [ ...messages, message ])
-      postMessageTo(message, user, to)
-      postMessageFrom(message, user, to)
+      postMessageFrom(message, user, to, room)
+      postMessageTo(message, user, to, room)
         .then((res) => setUser(res.data))
     })
 

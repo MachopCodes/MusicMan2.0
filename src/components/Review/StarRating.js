@@ -2,11 +2,12 @@ import React, { Fragment, useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 
 const StarRating = props => {
+  const { setReview, review } = props
   const [hover, setHover] = useState('')
 
   const handleChange = e => {
     const updatedField = { [e.target.name]: e.target.value }
-    props.setReview({ ...props.review, ...updatedField })
+    setReview({ ...review, ...updatedField })
   }
 
   return (
@@ -15,18 +16,10 @@ const StarRating = props => {
         const value = i + 1
         return (
           <label key={value}>
-            <input
-              type="radio"
-              name="rating"
-              value={value}
-              onClick={handleChange}
-            />
-            <FaStar
-              className="star"
-              size={23}
-              onMouseLeave={() => setHover(props.review.rating)}
+            <input type="radio" name="rating" value={value} onClick={handleChange} />
+            <FaStar className="star" size={23} onMouseLeave={() => setHover(review.rating)}
               onMouseEnter={() => setHover(value)}
-              color={value <= (hover || props.review.rating)
+              color={value <= (hover || review.rating)
                 ? '#ffc107'
                 : '#e4e5e9'}
             />
