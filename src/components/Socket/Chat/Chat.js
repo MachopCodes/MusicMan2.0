@@ -16,7 +16,7 @@ let socket
 
 const Chat = ({ user, location, setUser, opers, setOpers }) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(user.messages)
   const { name, room, to } = queryString.parse(location.search)
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     <div className='outerContainer'>
       <div className='container'>
         <InfoBar room={room} />
-        <Messages messages={messages} userMessages={user.messages} name={name} />
+        <Messages messages={messages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
       <TextContainer opers={opers}/>

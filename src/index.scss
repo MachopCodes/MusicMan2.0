@@ -1,16 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
-// #root {
-//   background: rgb(6,97,60);
-//   background-image: url('./home.PNG');
-//   height: 100%;
-//   background-size: 100px;
-//   background-position: center;
-//   background-repeat: repeat;
-// }
-
-main {
+#root {
+  background: rgb(6,97,60);
+  background-image: url('./icons/notes.jpg');
+  height: 100%;
+  background-size: 500px;
+  background-position: center;
+  background-repeat: repeat;
 }
+
+
 
 .app-name {
   color: #90EE90;

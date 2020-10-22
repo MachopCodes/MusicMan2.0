@@ -23,7 +23,6 @@ const IndexProfile = props => {
     })
   }, [])
 
-  console.log('data: ', data)
   let jsx
   !data
     ? jsx = <h1>loading...</h1>

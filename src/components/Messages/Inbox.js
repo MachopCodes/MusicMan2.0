@@ -1,32 +1,35 @@
 import React, { Fragment } from 'react'
-import { Card, Accordion, Badge, Button, Container } from 'react-bootstrap'
-import Reply from './Reply'
+import { Link } from 'react-router-dom'
+import { ListGroup, Button } from 'react-bootstrap'
 
-const Inbox = props => {
+const Inbox = ({ user }) => {
+  const a = []
+  const b = []
+  user.messages.map(m => {
+    if (m.receiverId !== user._id && !a.includes(m.receiverId)) {
+      a.push(m.receiverId)
+      console.log('receive pushing ', m.receiverName)
+      b.push({ id: m.receiverId, name: m.receiverName })
+    } if (m.senderId !== user._id && !a.includes(m.senderId)) {
+      a.push(m.senderId)
+      console.log('send pushing ', m.senderName)
+      b.push({ id: m.senderId, name: m.senderName })
+    }
+  })
+
   return (
     <Fragment>
-      <Container>
-        {props.user.messages.map(message =>
-          <Accordion key={message._id}>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  <p>Message from {message.from} {message.title}</p>
-                  <Badge pill variant="success">
-                    {message.createdAt.substring(5, 10)}@{message.createdAt.substring(11, 16)}
-                  </Badge>
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <div>{message.body}</div>
-                  <Reply message={message} msgAlert={props.msgAlert}/>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          </Accordion>
+      <ListGroup>
+        {b.map(p =>
+          <ListGroup.Item key={p.name}>
+            <h2>{p.name}</h2>
+            <Link to={`/chat?name=${user.name}&room=${p.name}&to=${p.id}`}>
+              <Button variant="success">Reply</Button>
+            </Link>
+            <Button variant="danger">Delete</Button>
+          </ListGroup.Item>
         )}
-      </Container>
+      </ListGroup>
     </Fragment>
   )
 }

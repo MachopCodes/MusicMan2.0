@@ -8,7 +8,6 @@ const authenticatedOptions = (
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
     <Nav.Link href="#profiles">Create Profile</Nav.Link>
     <Nav.Link href="#messages">Inbox</Nav.Link>
-    <Nav.Link href="#socket">socket test</Nav.Link>
   </Fragment>
 )
 
@@ -29,7 +28,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#" className="app-name">
-      MusicMan
+      MusicMeet
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

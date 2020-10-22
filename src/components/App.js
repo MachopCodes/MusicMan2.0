@@ -13,7 +13,6 @@ import CreateProfile from './Profile/CreateProfile'
 import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
 import Inbox from './Messages/Inbox'
-import Join from './Socket/Join/Join'
 import Chat from './Socket/Chat/Chat'
 
 class App extends Component {
@@ -55,9 +54,6 @@ class App extends Component {
           />
         ))}
         <main>
-          <Route path='/socket' render={(props) => (
-            <Join user={user} msgAlert={this.msgAlert}/>
-          )} />
           <Route path='/chat' render={(props) => (
             <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers}/>
           )} />
