@@ -1,19 +1,12 @@
 import React from 'react'
-
 import './Message.css'
-
 import ReactEmoji from 'react-emoji'
 
 const Message = ({ message, name }) => {
-  console.log('message: ', message)
   let isSentByCurrentOper = false
+  const trimmedSender = !message.oper ? message.senderName.trim().toLowerCase() : null
+  const trimmedReceiver = !message.oper ? message.receiverName.toLowerCase() : null
 
-  const trimmedSender = !message.oper
-    ? message.senderName.trim().toLowerCase() : null
-  const trimmedReceiver = !message.oper
-    ? message.receiverName.toLowerCase() : null
-
-  console.log(name, message.senderName)
   if (name === message.senderName || name.trim().toLowerCase() === message.oper) {
     isSentByCurrentOper = true
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EditProfile from './EditProfile'
 import apiUrl from '../../api/config'
 import axios from 'axios'
+import messages from '../AutoDismissAlert/messages'
 
 const ShowProfile = props => {
   const { msgAlert, match, user } = props
@@ -15,7 +16,14 @@ const ShowProfile = props => {
     setData(await response.data)
   }
   useEffect(() => {
-    fetchData().catch((err) => console.log(err))
+    fetchData()
+      .catch(error => {
+        msgAlert({
+          heading: 'Edit Failure: ' + error.message,
+          message: messages.showProfileFailure,
+          variant: 'danger'
+        })
+      })
   }, [])
 
   return (

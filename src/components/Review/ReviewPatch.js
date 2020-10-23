@@ -16,7 +16,6 @@ const ReviewPatch = props => {
   })
 
   const handleChange = e => {
-    e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
     setReview({ ...review, ...updatedField })
   }
@@ -26,8 +25,8 @@ const ReviewPatch = props => {
     editReview(review, props.review._id, props.user.token)
       .then(() => {
         props.msgAlert({
-          heading: 'Review Created!',
-          message: messages.createProfileSuccuess,
+          heading: 'Review Edited!',
+          message: messages.reviewPatchSuccess,
           variant: 'success'
         })
         handleClose()
@@ -35,8 +34,8 @@ const ReviewPatch = props => {
       })
       .catch(error => {
         props.msgAlert({
-          heading: 'Review Create Failed: ' + error.message,
-          message: messages.createProfileFailure,
+          heading: 'Review Edit Failed: ' + error.message,
+          message: messages.reviewPatchFailure,
           variant: 'danger'
         })
       })
@@ -51,27 +50,14 @@ const ReviewPatch = props => {
           </Modal.Header>
           <Form onSubmit={handleSubmit}>
             <Modal.Body>
-              <StarRating
-                review={review}
-                setReview={setReview} />
+              <StarRating review={review} setReview={setReview} />
               <Form.Group controlId="content">
-                <Form.Control
-                  as="textarea"
-                  name="content"
-                  rows="3"
-                  value={review.content}
-                  onChange={handleChange}
-                  placeholder="Tell us what you think of this user!"
-                />
+                <Form.Control as="textarea" name="content" rows="3" value={review.content} onChange={handleChange} placeholder="Tell us what you think!" />
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button type="Submit" variant="primary" >Save</Button>
-              <ReviewDelete
-                {...props}
-                user={props.user}
-                msgAlert={props.msgAlert}
-                review={props.review} />
+              <Button type="Submit" variant="primary">Save</Button>
+              <ReviewDelete {...props} user={props.user} msgAlert={props.msgAlert} review={props.review}/>
             </Modal.Footer>
           </Form>
         </Modal>

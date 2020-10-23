@@ -27,7 +27,7 @@ const IndexProfile = props => {
   !data
     ? jsx = <h1>loading...</h1>
     : jsx = <ProfileCard {...props} list={data.profiles} msgAlert={props.msgAlert} />
-  return (<div className="container">{jsx}</div>)
+  return <div className="container">{jsx}</div>
 }
 
 export default IndexProfile

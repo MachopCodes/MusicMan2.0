@@ -8,5 +8,18 @@ export default {
   changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
   createProfileSuccuess: 'Successfully created a profile for other views to see',
   createProfileFailure: 'Profile creation failure',
-  indexProfileFailure: 'Could not find profile'
+  indexProfileFailure: 'Could not find profile',
+  messageDeleteSuccess: 'Conversation deleted, conversation will no longer be availabe to view once signed out',
+  messageDeleteFailure: 'Message could not be deleted please try again later',
+  profileDeleteFailure: 'Profile could not be deleted please try again later',
+  profileDeleteSuccess: 'Profile deleted successfully, select Create Profile from the nav bar to create a new one',
+  editProfileFailure: 'Edit profile failed, please try again later',
+  editProfileSuccess: 'Profile edited successfully',
+  showProfileFailure: 'Profile fetch failed, please try again later',
+  reviewDeleteSuccess: 'Your review was successfully deleted',
+  reviewDeleteFailure: 'Review delete failed please try again later',
+  reviewPatchSuccess: 'Review successfully updated!',
+  reviewPatchFailure: 'Review was unable to be updated please try again later',
+  createReviewSuccess: 'Review successfully created! Thank you for sharing your feedback :)',
+  createReviewFailure: 'Unable to create review, please try again later'
 }

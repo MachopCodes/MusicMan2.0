@@ -12,7 +12,7 @@ import ChangePassword from './Auth/ChangePassword'
 import CreateProfile from './Profile/CreateProfile'
 import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
-import Inbox from './Messages/Inbox'
+import Inbox from './Socket/Inbox/Inbox'
 import Chat from './Socket/Chat/Chat'
 
 class App extends Component {
@@ -73,7 +73,7 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <Route user={user} path='/index' render={() => (
-            <IndexProfile msgAlert={this.msgAlert} user={user} setRecipient={this.setRecipient} />
+            <IndexProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/profiles' render={(props) => (
             <CreateProfile {...props} msgAlert={this.msgAlert} user={user} />

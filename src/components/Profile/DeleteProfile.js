@@ -20,13 +20,7 @@ const DeleteProfile = props => {
         variant: 'danger'
       }))
   }
-  return (
-    <Button
-      variant="danger"
-      onClick={handleSubmit}>
-      Delete Profile
-    </Button>
-  )
+  return <Button variant="danger" onClick={handleSubmit}>Delete Profile</Button>
 }
 
 export default withRouter(DeleteProfile)

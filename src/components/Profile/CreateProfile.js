@@ -18,7 +18,6 @@ const CreateProfile = props => {
   })
 
   const handleChange = e => {
-    e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
     setProfile({ ...profile, ...updatedField })
   }

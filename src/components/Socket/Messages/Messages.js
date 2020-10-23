@@ -6,12 +6,10 @@ import Message from './Message/Message'
 
 import './Messages.css'
 
-const Messages = ({ messages, name }) => {
-  // const filteredMessages = userMessages.filter(message => message.to === '5f7761c13fe26a5a20413c24' || message.from === '5f7761c13fe26a5a20413c24')
-  // console.log('filteredMessages: ', filteredMessages)
+const Messages = ({ messages, name, to }) => {
   return (
     <ScrollToBottom className="messages">
-      {messages.map((message, i) => <div key={i}><Message message={message} name={name}/></div>)}
+      {messages.map((m, i) => <div key={i}><Message message={m} name={name}/></div>)}
     </ScrollToBottom>
   )
 }

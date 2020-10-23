@@ -15,9 +15,15 @@ const ENDPOINT = 'http://localhost:4741'
 let socket
 
 const Chat = ({ user, location, setUser, opers, setOpers }) => {
-  const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState(user.messages)
   const { name, room, to } = queryString.parse(location.search)
+  const filteredMessages = []
+  user.messages.map(m => {
+    if (m.receiverId === to || m.senderId === to) {
+      filteredMessages.push(m)
+    }
+  })
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState(filteredMessages)
 
   useEffect(() => {
     socket = io(ENDPOINT)
@@ -34,10 +40,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       postMessageTo(message, user, to, room)
         .then((res) => setUser(res.data))
     })
-
-    socket.on('roomData', ({ opers }) => {
-      setOpers(opers)
-    })
+    socket.on('roomData', ({ opers }) => setOpers(opers))
   }, [])
 
   const sendMessage = (event) => {
@@ -52,7 +55,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     <div className='outerContainer'>
       <div className='container'>
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
+        <Messages to={to} messages={messages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
       <TextContainer opers={opers}/>

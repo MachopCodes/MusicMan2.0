@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { editProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
-import { Button, Form, Row, Col } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import DeleteProfile from './DeleteProfile'
 import Blurb from './Form/Blurb'
 import City from './Form/City'
@@ -20,7 +20,6 @@ const EditProfile = props => {
   })
 
   const handleChange = e => {
-    e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
     setProfile({ ...profile, ...updatedField })
   }
@@ -48,24 +47,12 @@ const EditProfile = props => {
   return (
     <section className="text-light">
       <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col><City city={profile.city} change={handleChange}/></Col>
-          <Col><State state={profile.state} change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col><Instruments change={handleChange}/></Col>
-          <Col><Interests change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col><Blurb blurb={profile.blurb} change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button type="Submit" variant="dark" className="mr-auto">
-              Submit
-            </Button>
-          </Col>
-        </Row>
+        <City city={profile.city} change={handleChange}/>
+        <State state={profile.state} change={handleChange}/>
+        <Instruments change={handleChange}/>
+        <Interests change={handleChange}/>
+        <Blurb blurb={profile.blurb} change={handleChange}/>
+        <Button type="Submit" variant="dark" className="mr-auto">Submit</Button>
         <DeleteProfile {...props} />
       </Form>
     </section>

@@ -2,7 +2,6 @@ import apiUrl from './config'
 import axios from 'axios'
 
 export const postMessageFrom = (message, user, to, room) => {
-  console.log(`message: ${message} user: ${user} to: ${to}`)
   return axios({
     method: 'POST',
     url: apiUrl + '/messagefrom',
@@ -36,13 +35,15 @@ export const postMessageTo = (message, user, to, room) => {
   })
 }
 
-export const reply = (data, message, user) => {
+export const deleteMessage = (user, e) => {
   return axios({
-    method: 'PATCH',
-    url: apiUrl + '/messages/' + message._id,
+    method: 'DELETE',
+    url: apiUrl + '/messages/' + user._id,
     headers: {
       'Authorization': 'Token token=' + user.token
     },
-    data
+    data: {
+      profileId: e.target.value
+    }
   })
 }
