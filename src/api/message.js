@@ -1,24 +1,49 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const postMessage = (data, user) => {
+export const postMessageFrom = (message, user, to, room) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/messages',
+    url: apiUrl + '/messagefrom',
     headers: {
       'Authorization': 'Token token=' + user.token
     },
-    data
+    data: {
+      receiverName: room,
+      receiverId: to,
+      senderName: user.name,
+      senderId: user._id,
+      text: message.text
+    }
   })
 }
 
-export const reply = (data, message, user) => {
+export const postMessageTo = (message, user, to, room) => {
   return axios({
-    method: 'PATCH',
-    url: apiUrl + '/messages/' + message._id,
+    method: 'POST',
+    url: apiUrl + '/messageto',
     headers: {
       'Authorization': 'Token token=' + user.token
     },
-    data
+    data: {
+      receiverName: room,
+      receiverId: to,
+      senderName: user.name,
+      senderId: user._id,
+      text: message.text
+    }
+  })
+}
+
+export const deleteMessage = (user, e) => {
+  return axios({
+    method: 'DELETE',
+    url: apiUrl + '/messages/' + user._id,
+    headers: {
+      'Authorization': 'Token token=' + user.token
+    },
+    data: {
+      profileId: e.target.value
+    }
   })
 }

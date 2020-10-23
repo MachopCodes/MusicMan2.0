@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import apiUrl from '../../api/config'
-import { Button, Form, Container, Row, Col } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import ProfileCard from './ProfileCards'
 import City from './Form/City'
 import Instruments from './Form/Instruments'
 import Interests from './Form/Interests'
 import State from './Form/State'
-// import messages from '../AutoDismissAlert/messages'
 
 const Search = props => {
   const [data, setData] = useState()
@@ -19,7 +18,6 @@ const Search = props => {
   })
 
   const handleChange = e => {
-    e.preventDefault()
     const updatedField = { [e.target.name]: e.target.value }
     setProfile({ ...profile, ...updatedField })
   }
@@ -27,53 +25,25 @@ const Search = props => {
   const handleSubmit = e => {
     e.preventDefault()
     const fetchData = async () => {
-      const response = await axios({
+      const res = await axios({
         method: 'GET',
         url: apiUrl + '/profiles',
         params: { profile }
       })
-      setData(await response.data)
+      setData(await res.data)
     }
-    fetchData()
-      .catch((err) => console.log(err))
+    fetchData().catch((err) => console.log(err))
   }
   let jsx
-  !data
-    ? jsx =
-    <section>
-      <Container>
-        <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col>
-              <Instruments change={handleChange}/>
-            </Col>
-            <Col>
-              <Interests change={handleChange}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <City change={handleChange} city={profile.city}/>
-            </Col>
-            <Col>
-              <State change={handleChange} state={profile.state}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button
-                type="Submit"
-                variant="dark"
-                className="mr-auto">
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
-    </section>
-    : jsx = <ProfileCard {...props} list={data.profiles} />
-  return (jsx)
+  data ? jsx = <ProfileCard {...props} list={data.profiles} /> : jsx =
+    <Form onSubmit={handleSubmit}>
+      <Instruments change={handleChange}/>
+      <Interests change={handleChange}/>
+      <City change={handleChange} city={profile.city}/>
+      <State change={handleChange} state={profile.state}/>
+      <Button type="Submit" variant="dark" className="mr-auto">Submit</Button>
+    </Form>
+  return jsx
 }
 
 export default Search

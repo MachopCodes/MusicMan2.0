@@ -1,28 +1,19 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import { changePassword } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
-
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Form, Button } from 'react-bootstrap'
 
 class ChangePassword extends Component {
   constructor () {
     super()
-
-    this.state = {
-      oldPassword: '',
-      newPassword: ''
-    }
+    this.state = { oldPassword: '', newPassword: '' }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  onChangePassword = event => {
-    event.preventDefault()
+  onChangePassword = e => {
+    e.preventDefault()
 
     const { msgAlert, history, user } = this.props
 
@@ -47,41 +38,33 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      <section className="wallpaper container text-light">
-        <div className="row">
-          <div className="col-sm-10 col-md-8 mx-auto mt-5">
-            <h3>Change Password</h3>
-            <Form onSubmit={this.onChangePassword}>
-              <Form.Group controlId="oldPassword">
-                <Form.Control
-                  required
-                  name="oldPassword"
-                  value={oldPassword}
-                  type="password"
-                  placeholder="Old Password"
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="newPassword">
-                <Form.Control
-                  required
-                  name="newPassword"
-                  value={newPassword}
-                  type="password"
-                  placeholder="New Password"
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-          </div>
+      <div className="row">
+        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+          <Form onSubmit={this.onChangePassword}>
+            <Form.Group controlId="oldPassword">
+              <Form.Control
+                required
+                name="oldPassword"
+                value={oldPassword}
+                type="password"
+                placeholder="Old Password"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="newPassword">
+              <Form.Control
+                required
+                name="newPassword"
+                value={newPassword}
+                type="password"
+                placeholder="New Password"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Button variant="dark" type="submit">Submit</Button>
+          </Form>
         </div>
-      </section>
+      </div>
     )
   }
 }

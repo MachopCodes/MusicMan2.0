@@ -12,13 +12,15 @@ import ChangePassword from './Auth/ChangePassword'
 import CreateProfile from './Profile/CreateProfile'
 import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
-import Inbox from './Messages/Inbox'
+import Inbox from './Socket/Inbox/Inbox'
+import Chat from './Socket/Chat/Chat'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
       user: null,
+      opers: [],
       profile: null,
       msgAlerts: []
     }
@@ -26,6 +28,9 @@ class App extends Component {
 
   setUser = user => this.setState({ user })
   clearUser = () => this.setState({ user: null })
+
+  setOpers = oper => this.setState([{ oper }])
+  clearOper = () => this.setState({ oper: [] })
 
   setProfile = profile => this.setState({ profile })
   clearProfile = () => this.setState({ profile: null })
@@ -35,7 +40,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, opers } = this.state
 
     return (
       <Fragment>
@@ -48,23 +53,27 @@ class App extends Component {
             message={msgAlert.message}
           />
         ))}
-        <main className="container">
+        <main>
+          <Route path='/chat' render={(props) => (
+            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers}/>
+          )} />
           <Route exact path='/' render={(props) => (
-            <Home user={user} msgAlert={this.msgAlert}/>)} />
+            <Home user={user} msgAlert={this.msgAlert}/>
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route user={user} path='/index' render={() => (
-            <IndexProfile msgAlert={this.msgAlert} user={user} />
-          )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route user={user} path='/index' render={() => (
+            <IndexProfile msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/profiles' render={(props) => (
             <CreateProfile {...props} msgAlert={this.msgAlert} user={user} />

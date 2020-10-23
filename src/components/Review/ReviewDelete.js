@@ -10,7 +10,7 @@ const ReviewDelete = props => {
       .then(() => {
         props.msgAlert({
           heading: 'Review Deleted!',
-          message: messages.createProfileSuccuess,
+          message: messages.reviewDeleteSuccess,
           variant: 'success'
         })
         props.history.push('/')
@@ -18,17 +18,14 @@ const ReviewDelete = props => {
       .catch(error => {
         props.msgAlert({
           heading: 'Review Delete Failed: ' + error.message,
-          message: messages.createProfileFailure,
+          message: messages.reviewDeleteFailure,
           variant: 'danger'
         })
       })
   }
   return (
     <Fragment>
-      <Button
-        type="Submit"
-        variant="danger"
-        onClick={handleSubmit}>Delete Review</Button>
+      <Button type="Submit" variant="danger" onClick={handleSubmit}>Delete Review</Button>
     </Fragment>
   )
 }

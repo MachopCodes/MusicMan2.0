@@ -1,30 +1,28 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
-
 import { Form, Button } from 'react-bootstrap'
+import Email from './Form/Email'
+import Password from './Form/Password'
+import Name from './Form/Name'
+import PassConf from './Form/PassConf'
 
 class SignUp extends Component {
   constructor () {
     super()
-
     this.state = {
       email: '',
-      userName: '',
+      name: '',
       password: '',
-      passwordConfirmation: ''
+      passConf: ''
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  onSignUp = event => {
-    event.preventDefault()
-
+  onSignUp = e => {
+    e.preventDefault()
     const { msgAlert, history, setUser } = this.props
 
     signUp(this.state)
@@ -37,7 +35,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
+        this.setState({ email: '', password: '', passConf: '' })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
           message: messages.signUpFailure,
@@ -47,66 +45,21 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, userName, password, passwordConfirmation } = this.state
-
+    const { email, name, password, passConf } = this.state
     return (
-      <section className="wallpaper">
-        <div className="container text-light">
-          <div className="row">
-            <div className="col-sm-10 col-md-8 mx-auto mt-5">
-              <h3>Sign Up</h3>
-              <Form onSubmit={this.onSignUp}>
-                <Form.Group controlId="email">
-                  <Form.Control
-                    required
-                    type="email"
-                    name="email"
-                    value={email}
-                    placeholder="Enter email"
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="userName">
-                  <Form.Control
-                    required
-                    type="text"
-                    name="userName"
-                    value={userName}
-                    placeholder="Enter User Name"
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="password">
-                  <Form.Control
-                    required
-                    name="password"
-                    value={password}
-                    type="password"
-                    placeholder="Password"
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="passwordConfirmation">
-                  <Form.Control
-                    required
-                    name="passwordConfirmation"
-                    value={passwordConfirmation}
-                    type="password"
-                    placeholder="Confirm Password"
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
-                <Button
-                  variant="primary"
-                  type="submit"
-                >
-                  Submit
-                </Button>
-              </Form>
-            </div>
+      <div className="container text-light">
+        <div className="row">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
+            <Form onSubmit={this.onSignUp}>
+              <Name name={name} change={this.handleChange}/>
+              <Email email={email} change={this.handleChange}/>
+              <Password password={password} change={this.handleChange}/>
+              <PassConf passConf={passConf} change={this.handleChange}/>
+              <Button variant="dark" type="submit">Sign Up</Button>
+            </Form>
           </div>
         </div>
-      </section>
+      </div>
     )
   }
 }

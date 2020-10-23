@@ -28,7 +28,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#" className="app-name">
-      MusicMan
+      MusicMeet
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
