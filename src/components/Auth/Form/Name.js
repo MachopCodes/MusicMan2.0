@@ -9,7 +9,7 @@ const Name = props => {
         name="name"
         value={props.name}
         onChange={props.change}
-        placeholder="Enter Name"
+        placeholder="Enter Username"
       />
     </Form.Group>
   )

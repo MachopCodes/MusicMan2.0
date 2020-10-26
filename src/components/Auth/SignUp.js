@@ -12,8 +12,8 @@ class SignUp extends Component {
   constructor () {
     super()
     this.state = {
-      email: '',
       name: '',
+      email: '',
       password: '',
       passConf: ''
     }
@@ -35,7 +35,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ email: '', password: '', passConf: '' })
+        this.setState({ name: '', email: '', password: '', passConf: '' })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
           message: messages.signUpFailure,
@@ -55,7 +55,7 @@ class SignUp extends Component {
               <Email email={email} change={this.handleChange}/>
               <Password password={password} change={this.handleChange}/>
               <PassConf passConf={passConf} change={this.handleChange}/>
-              <Button variant="dark" type="submit">Sign Up</Button>
+              <Button variant="outline-info" type="submit">Sign Up</Button>
             </Form>
           </div>
         </div>

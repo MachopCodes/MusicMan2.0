@@ -9,7 +9,7 @@ const Email = props => {
         name="email"
         value={props.email}
         onChange={props.change}
-        placeholder="Enter Name"
+        placeholder="Enter Email"
       />
     </Form.Group>
   )

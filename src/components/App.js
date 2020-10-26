@@ -3,8 +3,9 @@ import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
-import Home from './Layout/Home'
+import Search from './Layout/Search'
 import Header from './Layout/Header'
+import Settings from './Layout/Settings'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
 import SignOut from './Auth/SignOut'
@@ -58,7 +59,10 @@ class App extends Component {
             <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers}/>
           )} />
           <Route exact path='/' render={(props) => (
-            <Home user={user} msgAlert={this.msgAlert}/>
+            <Search user={user} msgAlert={this.msgAlert}/>
+          )} />
+          <Route exact path='/settings' render={(props) => (
+            <Settings user={user} msgAlert={this.msgAlert}/>
           )} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />

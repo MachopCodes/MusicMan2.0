@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 import { Form, Button } from 'react-bootstrap'
@@ -9,11 +9,7 @@ import Password from './Form/Password'
 class SignIn extends Component {
   constructor () {
     super()
-
-    this.state = {
-      email: '',
-      password: ''
-    }
+    this.state = { email: '', password: '' }
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -49,8 +45,11 @@ class SignIn extends Component {
               <Form onSubmit={this.onSignIn}>
                 <Email email={email} change={this.handleChange}/>
                 <Password password={password} change={this.handleChange}/>
-                <Button variant="dark" type="submit">Sign In</Button>
+                <Button variant="outline-info" type="submit">Sign In</Button>
               </Form>
+              <span>Don&apos;t have one?</span>
+              <br/>
+              <Link to={'/sign-up'}>Sign Up</Link>
             </div>
           </div>
         </div>

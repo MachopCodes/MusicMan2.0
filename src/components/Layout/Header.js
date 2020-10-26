@@ -2,40 +2,27 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
-const authenticatedOptions = (
+const auth = (
   <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#profiles">Create Profile</Nav.Link>
+    <Nav.Link href="#settings">Account Settings</Nav.Link>
     <Nav.Link href="#messages">Inbox</Nav.Link>
+    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
 )
 
-const unauthenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
-  </Fragment>
-)
+const signIn = <Nav.Link href="#sign-in">Sign In</Nav.Link>
 
-const alwaysOptions = (
-  <Fragment>
-    <Nav.Link href="#/">Home</Nav.Link>
-    <Nav.Link href="#index">View Profiles</Nav.Link>
-  </Fragment>
-)
+const search = <Nav.Link href="#/">Search</Nav.Link>
 
 const Header = ({ user }) => (
-  <Navbar bg="dark" variant="dark" expand="md">
-    <Navbar.Brand href="#" className="app-name">
-      MusicMeet
-    </Navbar.Brand>
+  <Navbar bg="light" variant="light" expand="md">
+    <Navbar.Brand href="#" className="app-name">MusicMan</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Hello, {user.email}</span>}
-        { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
+        { user && <span className="navbar-text mr-2">Hello, {user.name}</span>}
+        { search }
+        { user ? auth : signIn }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

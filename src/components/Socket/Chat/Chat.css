@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .container {
@@ -10,8 +10,8 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 8px;
-  height: 60%;
-  width: 50%;
+  height: 90%;
+  width: 90%;
 }
 
 @media (min-width: 320px) and (max-width: 680px) {

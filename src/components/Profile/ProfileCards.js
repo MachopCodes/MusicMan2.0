@@ -24,8 +24,8 @@ const ProfileCard = props => {
                 <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey="0">
                     { p.reviews.length === 0
-                      ? <div>no reviews</div>
-                      : <div>{p.reviews.length} reviews<Star reviews={p.reviews}/></div>}
+                      ? <span>No Reviews</span>
+                      : <span>{p.reviews.length} Reviews<Star reviews={p.reviews}/></span>}
                   </Accordion.Toggle>
                 </Card.Header>
                 {p.reviews.map(review => (
@@ -39,7 +39,7 @@ const ProfileCard = props => {
                   </Accordion.Collapse>
                 ))}
                 <Card.Footer>{user && user._id === p.owner._id
-                  ? <Link to={`/profiles/${p._id}`}><Button variant="success">Edit Profile</Button></Link>
+                  ? <Link to={`/profiles/${p._id}`}>Edit Profile</Link>
                   : <ReviewPost {...props} profile={p} user={user} msgAlert={msgAlert}/>}
                 </Card.Footer>
               </Card>

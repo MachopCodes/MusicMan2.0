@@ -9,7 +9,7 @@ const Password = props => {
         name="password"
         value={props.password}
         type="password"
-        placeholder="Password"
+        placeholder="Enter Password"
         onChange={props.change}
       />
     </Form.Group>

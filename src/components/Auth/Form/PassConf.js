@@ -3,10 +3,10 @@ import { Form } from 'react-bootstrap'
 
 const PassConf = props => {
   return (
-    <Form.Group controlId="passwordConfirmation">
+    <Form.Group controlId="passConf">
       <Form.Control
         required
-        name="passwordConfirmation"
+        name="passConf"
         value={props.passConf}
         type="password"
         placeholder="Confirm Password"

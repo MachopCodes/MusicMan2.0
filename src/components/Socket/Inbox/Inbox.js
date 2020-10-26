@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { ListGroup, Button } from 'react-bootstrap'
+import { FaTrash } from 'react-icons/fa'
 import { deleteMessage } from '../../../api/message'
 import messages from '../../AutoDismissAlert/messages'
 
 const Inbox = props => {
+  console.log('props are: ', props)
   const { user, msgAlert, history } = props
   const handleSubmit = e => {
     e.preventDefault()
@@ -34,19 +36,22 @@ const Inbox = props => {
   })
 
   return (
-    <Fragment>
+    <section>
       <ListGroup>
         {b.map(p =>
           <ListGroup.Item key={p.name}>
-            <h2>{p.name}</h2>
-            <Link to={`/chat?name=${user.name}&room=${p.name}&to=${p.id}`}>
-              <Button variant="success">Reply</Button>
-            </Link>
-            <Button variant="danger" value={p.id} onClick={handleSubmit}>Delete</Button>
+            <div className="row">
+              <div className="col-ml-0">
+                <Link to={`/chat?name=${user.name}&room=${p.name}&to=${p.id}`}><h4>{p.name}</h4></Link>
+              </div>
+              <div className="col mr-0">
+                <Button className="delete" variant="outline-danger" value={p.id} onClick={handleSubmit}><FaTrash/></Button>
+              </div>
+            </div>
           </ListGroup.Item>
         )}
       </ListGroup>
-    </Fragment>
+    </section>
   )
 }
 

@@ -12,6 +12,13 @@ export const createProfile = (data, token) => {
   })
 }
 
+export const getProfile = id => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/settings/' + id
+  })
+}
+
 export const editProfile = (data, id, token) => {
   console.log('data in edit is: ', data)
   return axios({
