@@ -22,9 +22,7 @@ const Settings = props => {
   }, [])
 
   let jsx; if (data) {
-    data.profile.length < 1
-      ? jsx = <Link to="/profiles"><Button variant="outline-success">Create Profile</Button></Link>
-      : jsx = <ProfileCard {...props} list={data.profile} msgAlert={msgAlert} user={user} />
+    jsx = <ProfileCard {...props} list={data.profile} msgAlert={msgAlert} user={user} />
   }
 
   return (
@@ -40,6 +38,7 @@ const Settings = props => {
       <br/>
       <h2>Profile Information</h2>
       <span>{jsx}</span>
+      <Link to="/profiles"><Button variant="outline-success">Create New Profile</Button></Link>
     </section>
   )
 }
