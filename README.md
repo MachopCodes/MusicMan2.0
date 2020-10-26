@@ -1,5 +1,5 @@
 # MusicMan2.0
-MusicMan2.0 is a remake of Music Man with React. 
+MusicMan2.0 is a remake of Music Man with React. The main additions to the application include a search, reviews and messaging. To make a fully functioning app, it needed to allow users to search profiles by criteria, post reviews on different users and for users to message other users - because an application wouldn't be complete if users had to resort to their emails. 
 
 **[Deployed Server Application](https://MusicMan2.0-Server.herokuapp.com/)** |
 **[Server Repository](https://github.com/MachopCodes/MusicMan2.0-Server)** |
@@ -15,15 +15,10 @@ MusicMan2.0 is a remake of Music Man with React.
 - Express.js
 
 **User Stories**
-As an unregistered user I can see the Home Page
-As a registered user I can view my upcoming trips
-As a registered user I can add trips to my personal trip log
-As an unregistered user I can create a User Account
-As a registered ser I can update or remove my planned trips
-As a registered user I would like to be able to access tidal information related to my trips
-
-
-The main additions to the application include a search, reviews and messaging. To make a fully functioning app, it needed to allow users to search profiles by criteria, post reviews on different users and for users to message other users - because an application wouldn't be complete if users had to resort to their emails. 
+As an unregistered user I can search and view profiles
+As a registered user I can create a profile
+As a registered user I can write reviews for other user's profiles
+As a registered user I can message other users and view my past messages
 
 ![erd](https://github.com/MachopCodes/MusicMan2.0/blob/master/erd.PNG)
 
