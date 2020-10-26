@@ -3,7 +3,7 @@ MusicMan2.0 is a remake of Music Man with React.
 
 The main additions to the application include a search, reviews and messaging. To make a fully functioning app, it needed to allow users to search profiles by criteria, post reviews on different users and for users to message other users - because an application wouldn't be complete if users had to resort to their emails. 
 
-![erd](erd.jpg)
+![erd](https://github.com/MachopCodes/MusicMan2.0/blob/master/erd.PNG)
 
 # Search
 Search included developing logic to query all profiles based on interest, instrument and state, which is done by a mongoose `.find()` query.
