@@ -11,12 +11,11 @@ const auth = (
 )
 
 const signIn = <Nav.Link href="#sign-in">Sign In</Nav.Link>
-
 const search = <Nav.Link href="#/">Search</Nav.Link>
 
 const Header = ({ user }) => (
   <Navbar bg="light" variant="light" expand="md">
-    <Navbar.Brand href="#" className="app-name">MusicMan</Navbar.Brand>
+    <Navbar.Brand href="#" className="app-name">musicman</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">

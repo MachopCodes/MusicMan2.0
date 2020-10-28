@@ -1,56 +1,46 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { ListGroup, Button } from 'react-bootstrap'
-import { FaTrash } from 'react-icons/fa'
+import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap'
+import { FaTrash, FaReply } from 'react-icons/fa'
 import { deleteMessage } from '../../../api/message'
 import messages from '../../AutoDismissAlert/messages'
 
 const Inbox = props => {
-  console.log('props are: ', props)
-  const { user, msgAlert, history } = props
-  const handleSubmit = e => {
-    e.preventDefault()
-    deleteMessage(user, e)
-      .then(() => msgAlert({
-        heading: 'Conversation Deleted',
-        message: messages.messageDeleteSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
-      .catch(err => msgAlert({
-        heading: 'Failed to delete: ' + err.message,
-        message: messages.messageDeleteFailure,
-        variant: 'danger'
-      }))
+  const { user, msgAlert, history } = props; const click = e => {
+    e.preventDefault(); deleteMessage(user, e).then(() => msgAlert({
+      heading: 'Conversation Deleted',
+      message: messages.messageDeleteSuccess,
+      variant: 'success'
+    })).then(() => history.push('/')).catch(err => msgAlert({
+      heading: 'Failed to delete: ' + err.message,
+      message: messages.messageDeleteFailure,
+      variant: 'danger'
+    }))
   }
-
-  const a = []; const b = []
-  user.messages.map(m => {
+  const a = []; const b = []; user.messages.map(m => {
     if (m.receiverId !== user._id && !a.includes(m.receiverId)) {
-      a.push(m.receiverId)
-      b.push({ id: m.receiverId, name: m.receiverName })
+      a.push(m.receiverId); b.push({ id: m.receiverId, name: m.receiverName })
     } if (m.senderId !== user._id && !a.includes(m.senderId)) {
-      a.push(m.senderId)
-      b.push({ id: m.senderId, name: m.senderName })
+      a.push(m.senderId); b.push({ id: m.senderId, name: m.senderName })
     }
-  })
-
-  return (
+  }); return (
     <section>
-      <ListGroup>
-        {b.map(p =>
-          <ListGroup.Item key={p.name}>
-            <div className="row">
-              <div className="col-ml-0">
-                <Link to={`/chat?name=${user.name}&room=${p.name}&to=${p.id}`}><h4>{p.name}</h4></Link>
-              </div>
-              <div className="col mr-0">
-                <Button className="delete" variant="outline-danger" value={p.id} onClick={handleSubmit}><FaTrash/></Button>
-              </div>
-            </div>
-          </ListGroup.Item>
-        )}
-      </ListGroup>
+      <Container>
+        <Row>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12}>
+            <ListGroup>
+              {b.map(p =>
+                <ListGroup.Item key={p.name}>
+                  <Row>
+                    <Col ml={0}><h6>{p.name}</h6></Col>
+                    <Col><Button href={`#chat?name=${user.name}&room=${p.name}&to=${p.id}`} className="success" variant="outline-success" value={p.id}><FaReply/></Button></Col>
+                    <Col mr={0}><Button className="delete mr-0" variant="outline-danger" value={p.id} onClick={click}><FaTrash/></Button></Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
+            </ListGroup>
+          </Col>
+        </Row>
+      </Container>
     </section>
   )
 }

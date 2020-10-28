@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { createProfile } from '../../api/profile'
 import messages from '../AutoDismissAlert/messages'
 import Blurb from './Form/Blurb'
@@ -8,13 +8,9 @@ import Instruments from './Form/Instruments'
 import Interests from './Form/Interests'
 import State from './Form/State'
 
-const CreateProfile = props => {
+const CreateProfile = ({ user, msgAlert, history }) => {
   const [profile, setProfile] = useState({
-    city: '',
-    state: '',
-    instrument: '',
-    interest: '',
-    blurb: ''
+    city: '', state: '', instrument: '', interest: '', blurb: ''
   })
 
   const handleChange = e => {
@@ -23,18 +19,16 @@ const CreateProfile = props => {
   }
 
   const handleSubmit = e => {
-    e.preventDefault()
-    createProfile(profile, props.user.token)
+    e.preventDefault(); createProfile(profile, user.token)
       .then(() => {
-        props.msgAlert({
+        msgAlert({
           heading: 'Profile Created!',
           message: messages.createProfileSuccuess,
           variant: 'success'
-        })
-        props.history.push('/')
+        }); history.push('/')
       })
       .catch(error => {
-        props.msgAlert({
+        msgAlert({
           heading: 'Profile Create Failed: ' + error.message,
           message: messages.createProfileFailure,
           variant: 'danger'
@@ -44,26 +38,20 @@ const CreateProfile = props => {
 
   return (
     <section className="text-light">
-      <Form onSubmit={handleSubmit}>
+      <Container>
         <Row>
-          <Col><City city={profile.city} change={handleChange}/></Col>
-          <Col><State state={profile.state} change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col><Instruments change={handleChange}/></Col>
-          <Col><Interests change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col><Blurb blurb={profile.blurb} change={handleChange}/></Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button type="Submit" variant="dark" className="mr-auto">
-              Submit
-            </Button>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12}>
+            <Form onSubmit={handleSubmit}>
+              <City city={profile.city} change={handleChange}/>
+              <State state={profile.state} change={handleChange}/>
+              <Instruments change={handleChange}/>
+              <Interests change={handleChange}/>
+              <Blurb blurb={profile.blurb} change={handleChange}/>
+              <Button type="Submit" variant="outline-info btn-block">Create Profile</Button>
+            </Form>
           </Col>
         </Row>
-      </Form>
+      </Container>
     </section>
   )
 }

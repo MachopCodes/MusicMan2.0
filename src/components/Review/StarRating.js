@@ -18,11 +18,8 @@ const StarRating = props => {
           <label key={value}>
             <input type="radio" name="rating" value={value} onClick={handleChange} />
             <FaStar className="star" size={23} onMouseLeave={() => setHover(review.rating)}
-              onMouseEnter={() => setHover(value)}
-              color={value <= (hover || review.rating)
-                ? '#ffc107'
-                : '#e4e5e9'}
-            />
+              color={value <= (hover || review.rating) ? '#ffc107' : '#e4e5e9'}
+              onMouseEnter={() => setHover(value)}/>
           </label>
         )
       })}

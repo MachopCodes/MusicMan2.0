@@ -4,6 +4,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
 import { createReview } from '../../api/review'
 import StarRating from './StarRating'
+import './Review.css'
 
 const ReviewPost = props => {
   const { profile, user, msgAlert } = props
@@ -64,7 +65,7 @@ const ReviewPost = props => {
       </Fragment>
     )
   } else {
-    return (<Fragment>Log in to write a review</Fragment>)
+    return <span className="small-text text-muted italic">Log in to write a review</span>
   }
 }
 

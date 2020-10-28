@@ -9,7 +9,18 @@
   background-repeat: repeat;
 }
 
+.myaccordion {
+  border-bottom-color: #EDEFF0;
+  background: transparent;
+}
 
+.text-right {
+  text-align: right;
+}
+
+.italic {
+  font-style: italic;
+}
 
 .app-name {
   color: #90EE90;
@@ -19,8 +30,12 @@
   text-shadow: 1px 1px #90EE90;
 }
 
+.small-text {
+  font-size: x-small;
+}
+
 section {
-  padding: 5rem;
+  padding: 8rem 2rem 8rem 2rem;
 }
 
 input[type="radio"] {

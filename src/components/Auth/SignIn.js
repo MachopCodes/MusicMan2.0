@@ -2,57 +2,48 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
-import { Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import Email from './Form/Email'
 import Password from './Form/Password'
 
 class SignIn extends Component {
   constructor () {
-    super()
-    this.state = { email: '', password: '' }
+    super(); this.state = { email: '', password: '' }
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
-
   onSignIn = e => {
-    e.preventDefault()
-    const { msgAlert, history, setUser } = this.props
-    signIn(this.state)
-      .then(res => setUser(res.data.user))
-      .then(() => msgAlert({
+    e.preventDefault(); const { msgAlert, history, setUser } = this.props
+    signIn(this.state).then(res => setUser(res.data.user)).then(() => {
+      msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,
         variant: 'success'
-      }))
-      .then(() => history.push('/'))
-      .catch(error => {
-        this.setState({ email: '', password: '' })
-        msgAlert({
-          heading: 'Sign In Failed with error: ' + error.message,
-          message: messages.signInFailure,
-          variant: 'danger'
-        })
+      }); history.push('/')
+    }).catch(error => {
+      this.setState({ email: '', password: '' }); msgAlert({
+        heading: 'Sign In Failed with error: ' + error.message,
+        message: messages.signInFailure,
+        variant: 'danger'
       })
-  }
-
-  render () {
-    const { email, password } = this.state
+    })
+  }; render () {
     return (
       <section>
-        <div className="Container text-dark">
-          <div className="row">
-            <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <Container>
+          <Row>
+            <Col xl={4} lg={6} md={8} sm={10} xs={12}>
               <Form onSubmit={this.onSignIn}>
-                <Email email={email} change={this.handleChange}/>
-                <Password password={password} change={this.handleChange}/>
-                <Button variant="outline-info" type="submit">Sign In</Button>
-              </Form>
-              <span>Don&apos;t have one?</span>
-              <br/>
-              <Link to={'/sign-up'}>Sign Up</Link>
-            </div>
-          </div>
-        </div>
+                <Email email={this.state.email} change={this.handleChange}/>
+                <Password password={this.state.password} change={this.handleChange}/>
+                <Button variant="outline-info btn-block" type="submit">Sign In</Button>
+              </Form><br/>
+              <Link className="align-items-center d-flex justify-content-center small-text" to={'/sign-up'}>
+                Don&apos;t have an account? Sign Up
+              </Link>
+            </Col>
+          </Row>
+        </Container>
       </section>
     )
   }

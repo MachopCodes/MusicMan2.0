@@ -9,7 +9,7 @@ const City = props => {
         name="city"
         value={props.city}
         onChange={props.change}
-        placeholder="City"
+        placeholder="Town / City"
       />
     </Form.Group>
   )

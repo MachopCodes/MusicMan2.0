@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ProfileCard from './ProfileCards'
+import ProfileCard from './Cards/ProfileCards'
 import axios from 'axios'
 import apiUrl from '../../api/config'
 import messages from '../AutoDismissAlert/messages'

@@ -20,7 +20,7 @@ const ReviewScore = props => {
           return (
             <label key={value}>
               <input type="radio" name="rating" value={value} />
-              <FaStar className="star" color={value <= Math.ceil(sum / reviews.length) ? '#ffc107' : '#e4e5e9'}/>
+              <FaStar className="star" size="15px" color={value <= Math.ceil(sum / reviews.length) ? '#ffc107' : '#e4e5e9'}/>
             </label>
           )
         })}
