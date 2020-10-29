@@ -6,9 +6,9 @@
 .input {
   border: none;
   border-radius: 0;
-  padding: 5%;
+  padding: .5%;
   width: 80%;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 input:focus, textarea:focus, select:focus{
@@ -23,5 +23,6 @@ input:focus, textarea:focus, select:focus{
   padding: 20px;
   display: inline-block;
   border: none;
+  border-radius: 5%;
   width: 20%;
 }

@@ -1,28 +1,20 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { changePassword } from '../../api/auth'
-import messages from '../AutoDismissAlert/messages'
+import m from '../AutoDismissAlert/messages'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 class ChangePassword extends Component {
   constructor () {
     super(); this.state = { oldPassword: '', newPassword: '' }
-  }
-
-  handleChange = e => this.setState({ [e.target.name]: e.target.value })
-
-  onChangePassword = e => {
+  }; handleChange = e => this.setState({ [e.target.name]: e.target.value }); onChangePassword = e => {
     e.preventDefault(); const { msgAlert, history, user } = this.props
     changePassword(this.state, user).then(() => msgAlert({
-      heading: 'Change Password Success',
-      message: messages.changePasswordSuccess,
-      variant: 'success'
-    })).then(() => history.push('/')).catch(error => {
+      heading: 'Change Password Success', message: m.changePass, variant: 'success'
+    })).then(() => history.push('/')).catch(e => {
       this.setState({ oldPassword: '', newPassword: '' })
       msgAlert({
-        heading: 'Change Password Failed with error: ' + error.message,
-        message: messages.changePasswordFailure,
-        variant: 'danger'
+        heading: 'Change Password Failed with error: ' + e.message, message: m.changePassFail, variant: 'danger'
       })
     })
   }; render () {
@@ -30,7 +22,7 @@ class ChangePassword extends Component {
       <section>
         <Container>
           <Row>
-            <Col xl={4} lg={6} md={8} sm={10} xs={12}>
+            <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
               <Form onSubmit={this.onChangePassword}>
                 <Form.Group controlId="oldPassword">
                   <Form.Control
@@ -52,7 +44,7 @@ class ChangePassword extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Group>
-                <Button variant="outline-info btn-block" type="submit">Submit</Button>
+                <Button variant="info btn-block" type="submit">Change Password</Button>
               </Form>
             </Col>
           </Row>

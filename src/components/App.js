@@ -11,48 +11,23 @@ import SignIn from './Auth/SignIn'
 import SignOut from './Auth/SignOut'
 import ChangePassword from './Auth/ChangePassword'
 import CreateProfile from './Profile/CreateProfile'
-import IndexProfile from './Profile/IndexProfile'
 import ShowProfile from './Profile/ShowProfile'
 import Inbox from './Socket/Inbox/Inbox'
 import Chat from './Socket/Chat/Chat'
 
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {
-      user: null,
-      opers: [],
-      profile: null,
-      msgAlerts: []
-    }
-  }
-
-  setUser = user => this.setState({ user })
-  clearUser = () => this.setState({ user: null })
-
-  setOpers = oper => this.setState([{ oper }])
-  clearOper = () => this.setState({ oper: [] })
-
-  setProfile = profile => this.setState({ profile })
-  clearProfile = () => this.setState({ profile: null })
-
+  constructor () { super(); this.state = { user: null, opers: [], profile: null, msgAlerts: [] } }
+  setUser = user => this.setState({ user }); clearUser = () => this.setState({ user: null })
+  setOpers = oper => this.setState([{ oper }]); clearOper = () => this.setState({ oper: [] })
+  setProfile = profile => this.setState({ profile }); clearProfile = () => this.setState({ profile: null })
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
-  }
-
-  render () {
-    const { msgAlerts, user, opers } = this.state
-
-    return (
+  }; render () {
+    const { msgAlerts, user, opers } = this.state; return (
       <Fragment>
         <Header user={user} />
-        {msgAlerts.map((msgAlert, index) => (
-          <AutoDismissAlert
-            key={index}
-            heading={msgAlert.heading}
-            variant={msgAlert.variant}
-            message={msgAlert.message}
-          />
+        {msgAlerts.map((alert, i) => (
+          <AutoDismissAlert key={i} heading={alert.heading} variant={alert.variant} message={alert.message}/>
         ))}
         <main>
           <Route path='/chat' render={(props) => (
@@ -76,9 +51,6 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route user={user} path='/index' render={() => (
-            <IndexProfile msgAlert={this.msgAlert} user={user} />
-          )} />
           <AuthenticatedRoute user={user} exact path='/profiles' render={(props) => (
             <CreateProfile {...props} msgAlert={this.msgAlert} user={user} />
           )} />
@@ -86,7 +58,7 @@ class App extends Component {
             <ShowProfile {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/messages' render={(props) => (
-            <Inbox {...props} msgAlert={this.msgAlert} user={user} />
+            <Inbox {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
         </main>
       </Fragment>

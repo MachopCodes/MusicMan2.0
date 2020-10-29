@@ -1,13 +1,11 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const postMessageFrom = (message, user, to, room) => {
+export const msgFrom = (message, user, to, room) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/messagefrom',
-    headers: {
-      'Authorization': 'Token token=' + user.token
-    },
+    headers: { 'Authorization': 'Token token=' + user.token },
     data: {
       receiverName: room,
       receiverId: to,
@@ -18,13 +16,11 @@ export const postMessageFrom = (message, user, to, room) => {
   })
 }
 
-export const postMessageTo = (message, user, to, room) => {
+export const msgTo = (message, user, to, room) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/messageto',
-    headers: {
-      'Authorization': 'Token token=' + user.token
-    },
+    headers: { 'Authorization': 'Token token=' + user.token },
     data: {
       receiverName: room,
       receiverId: to,
@@ -35,15 +31,19 @@ export const postMessageTo = (message, user, to, room) => {
   })
 }
 
-export const deleteMessage = (user, e) => {
+export const deleteMessage = (data, user) => {
+  console.log('data is: ', data)
   return axios({
     method: 'DELETE',
     url: apiUrl + '/messages/' + user._id,
-    headers: {
-      'Authorization': 'Token token=' + user.token
-    },
-    data: {
-      profileId: e.target.value
-    }
+    headers: { 'Authorization': 'Token token=' + user.token },
+    data: { profileId: data }
+  })
+}
+
+export const getUser = id => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/get-user/' + id
   })
 }

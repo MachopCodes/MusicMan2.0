@@ -20,7 +20,6 @@ export const getProfile = id => {
 }
 
 export const editProfile = (data, id, token) => {
-  console.log('data in edit is: ', data)
   return axios({
     method: 'PATCH',
     url: apiUrl + '/profiles/' + id,

@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button, Accordion } from 'react-bootstrap'
 import ReviewPost from '../../Review/ReviewPost'
 import ReviewPatch from '../../Review/ReviewPatch'
 import Star from '../../Review/Star'
+import { FaUserEdit } from 'react-icons/fa'
 
 const ProfileCard = props => {
   const { list, msgAlert, user } = props
@@ -11,7 +12,7 @@ const ProfileCard = props => {
     <Fragment>{list.map(p => (
       <Container key={p._id}>
         <Row>
-          <Col xl={4} lg={6} md={8} sm={10} xs={12}>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
             <br/>
             <Card className={`d-flex border-${p.interest === 'Lessons'
               ? 'primary' : p.interest === 'Jams' ? 'success' : p.interest === 'Gigs' ? 'danger' : 'white'}`}>
@@ -49,7 +50,7 @@ const ProfileCard = props => {
                   ))}
                   <Card.Footer className="myaccordion align-items-center d-flex justify-content-center border-0">
                     {user && user._id === p.owner._id
-                      ? <Link to={`/profiles/${p._id}`}>Edit Profile</Link>
+                      ? <Link to={`/profiles/${p._id}`}><Button variant="outline-success" className="mr-auto"><FaUserEdit/> Edit Profile</Button></Link>
                       : <ReviewPost {...props} profile={p} user={user} msgAlert={msgAlert}/>}
                   </Card.Footer>
                 </Card>

@@ -35,13 +35,12 @@ const Search = props => {
     <Fragment>
       <Container>
         <Row>
-          <Col xl={4} lg={6} md={8} sm={10} xs={12}>
-            <Form onSubmit={handleSubmit}>
-              <Instruments change={handleChange}/>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+            <Form onSubmit={handleSubmit}><Instruments change={handleChange}/>
               <Interests change={handleChange}/>
               <State change={handleChange} state={profile.state}/>
               <City change={handleChange} city={profile.city}/>
-              <Button type="Submit" variant="outline-info" className="mr-auto btn-block"><FaSearch/></Button>
+              <Button type="Submit" variant="info" className="mr-auto btn-block"><FaSearch/></Button>
             </Form>
           </Col>
         </Row>
@@ -50,7 +49,7 @@ const Search = props => {
   )
   let card; if (data) {
     card = <ProfileCard {...props} list={data.profiles}/>
-  }; return <section>{search}{card}</section>
+  }; return <section>{search}<br/><br/>{card}</section>
 }
 
 export default Search

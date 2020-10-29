@@ -1,0 +1,16 @@
+.listgroup {
+  padding: 0;
+}
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.col {
+  display: flex;
+  padding: 0;
+}

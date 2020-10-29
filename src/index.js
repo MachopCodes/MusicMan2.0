@@ -5,10 +5,6 @@ import './index.scss'
 import App from './components/App'
 import { HashRouter } from 'react-router-dom'
 
-const appJsx = (
-  <HashRouter>
-    <App/>
-  </HashRouter>
-)
+const appJsx = <HashRouter><App/></HashRouter>
 
 ReactDOM.render(appJsx, document.getElementById('root'))

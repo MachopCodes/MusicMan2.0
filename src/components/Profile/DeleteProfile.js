@@ -1,26 +1,18 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import messages from '../AutoDismissAlert/messages'
+import m from '../AutoDismissAlert/messages'
 import { deleteProfile } from '../../api/profile'
+import { FaTrash } from 'react-icons/fa'
 
 const DeleteProfile = props => {
   const handleSubmit = e => {
-    e.preventDefault()
-    deleteProfile(props.match.params.id, props.user.token)
-      .then(() => props.msgAlert({
-        heading: 'Delete Success',
-        message: messages.profileDeleteSuccess,
-        variant: 'success'
-      }))
-      .then(() => props.history.push('/'))
-      .catch(err => props.msgAlert({
-        heading: 'Failed to delete: ' + err.message,
-        message: messages.profileDeleteFailure,
-        variant: 'danger'
-      }))
-  }
-  return <Button variant="danger" onClick={handleSubmit}>Delete Profile</Button>
+    e.preventDefault(); deleteProfile(props.match.params.id, props.user.token).then(() => props.msgAlert({
+      heading: 'Delete Success', message: m.profDel, variant: 'success'
+    })).then(() => props.history.push('/')).catch(e => props.msgAlert({
+      heading: 'Failed to delete: ' + e.message, message: m.profDelFail, variant: 'danger'
+    }))
+  }; return <Button variant="outline-danger btn-block" onClick={handleSubmit}><FaTrash/></Button>
 }
 
 export default withRouter(DeleteProfile)

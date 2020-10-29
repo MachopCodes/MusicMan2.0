@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import m from '../AutoDismissAlert/messages'
 import { editProfile } from '../../api/profile'
-import messages from '../AutoDismissAlert/messages'
-import { Button, Form } from 'react-bootstrap'
 import DeleteProfile from './DeleteProfile'
-import Blurb from './Form/Blurb'
-import City from './Form/City'
 import Instruments from './Form/Instruments'
 import Interests from './Form/Interests'
 import State from './Form/State'
+import Blurb from './Form/Blurb'
+import City from './Form/City'
+import { FaUserEdit } from 'react-icons/fa'
 
 const EditProfile = props => {
   const { msgAlert, p, _id, user } = props
@@ -17,44 +18,33 @@ const EditProfile = props => {
     instrument: p.instrument,
     interest: p.interest,
     blurb: p.blurb
-  })
-
-  const handleChange = e => {
-    const updatedField = { [e.target.name]: e.target.value }
-    setProfile({ ...profile, ...updatedField })
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    editProfile(profile, _id, user.token)
-      .then(() => {
-        msgAlert({
-          heading: 'Edit Success',
-          message: messages.editProfileSuccess,
-          variant: 'success'
-        })
-        history.push('/')
-      })
-      .catch(error => {
-        msgAlert({
-          heading: 'Edit Failure: ' + error.message,
-          message: messages.editProfileFailure,
-          variant: 'danger'
-        })
-      })
-  }
-
-  return (
+  }); const handleChange = e => {
+    const updatedField = { [e.target.name]: e.target.value }; setProfile({ ...profile, ...updatedField })
+  }; const handleSubmit = e => {
+    e.preventDefault(); editProfile(profile, _id, user.token).then(() => {
+      msgAlert({ heading: 'Edit Success', message: m.profPatch, variant: 'success' }); history.push('/')
+    }).catch(e => {
+      msgAlert({ heading: 'Edit Failure: ' + e.message, message: m.profPatchFail, variant: 'danger' })
+    })
+  }; return (
     <section className="text-light">
-      <Form onSubmit={handleSubmit}>
-        <City city={profile.city} change={handleChange}/>
-        <State state={profile.state} change={handleChange}/>
-        <Instruments change={handleChange}/>
-        <Interests change={handleChange}/>
-        <Blurb blurb={profile.blurb} change={handleChange}/>
-        <Button type="Submit" variant="dark" className="mr-auto">Submit</Button>
-        <DeleteProfile {...props} />
-      </Form>
+      <Container>
+        <Row>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+            <Form onSubmit={handleSubmit}>
+              <City city={profile.city} change={handleChange}/>
+              <State state={profile.state} change={handleChange}/>
+              <Instruments change={handleChange}/>
+              <Interests change={handleChange}/>
+              <Blurb blurb={profile.blurb} change={handleChange}/>
+              <Row>
+                <Col><Button type="Submit" variant="outline-success btn-block" className="mr-auto"><FaUserEdit/></Button></Col>
+                <Col><DeleteProfile {...props} /></Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </section>
   )
 }
