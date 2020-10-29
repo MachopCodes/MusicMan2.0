@@ -7,6 +7,7 @@ import City from './Form/City'
 import Instruments from './Form/Instruments'
 import Interests from './Form/Interests'
 import State from './Form/State'
+import { FaUserPlus } from 'react-icons/fa'
 
 const CreateProfile = ({ user, msgAlert, history }) => {
   const [profile, setProfile] = useState({
@@ -35,7 +36,7 @@ const CreateProfile = ({ user, msgAlert, history }) => {
               <Instruments change={handleChange}/>
               <Interests change={handleChange}/>
               <Blurb blurb={profile.blurb} change={handleChange}/>
-              <Button type="Submit" variant="outline-info btn-block">Create Profile</Button>
+              <Button type="Submit" variant="primary btn-block"><FaUserPlus/> Create Profile</Button>
             </Form>
           </Col>
         </Row>
