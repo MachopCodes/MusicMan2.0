@@ -40,7 +40,7 @@ const Search = props => {
               <Interests change={handleChange}/>
               <State change={handleChange} state={profile.state}/>
               <City change={handleChange} city={profile.city}/>
-              <Button type="Submit" variant="info" className="mr-auto btn-block"><FaSearch/></Button>
+              <Button type="Submit" variant="info" className="mr-auto btn-block"><FaSearch/>Search for musicians in your area</Button>
             </Form>
           </Col>
         </Row>
