@@ -9,7 +9,6 @@ import City from '../Profile/Form/City'
 import Instruments from '../Profile/Form/Instruments'
 import Interests from '../Profile/Form/Interests'
 import State from '../Profile/Form/State'
-import Loading from './Loading'
 
 const Search = props => {
   const [data, setData] = useState()
@@ -49,11 +48,9 @@ const Search = props => {
       : card = (
         <Fragment>
           <AutoDismissAlert variant="info" heading="no profiles matched your search, please try again"/>
-          <Row>
-            <Col className="mx-auto"><Loading/></Col>
-            <Col className="mx-auto"> <Badge variant="light">no results, please try another search</Badge></Col>
-            <Col className="mx-auto"><Loading/></Col>
-          </Row>
+          <div className=" align-items-center d-flex justify-content-center">
+            <Badge variant="light"><h6>no results, please try another search</h6></Badge>
+          </div>
         </Fragment>
       )
   }; return (
