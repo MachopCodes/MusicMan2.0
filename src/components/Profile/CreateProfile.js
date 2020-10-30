@@ -12,19 +12,23 @@ import { FaUserPlus } from 'react-icons/fa'
 const CreateProfile = ({ user, msgAlert, history }) => {
   const [profile, setProfile] = useState({
     city: '', state: '', instrument: '', interest: '', blurb: ''
-  }); const handleChange = e => {
+  })
+  const handleChange = e => {
     const updatedField = { [e.target.name]: e.target.value }
     setProfile({ ...profile, ...updatedField })
-  }; const handleSubmit = e => {
+  }
+  const handleSubmit = e => {
     e.preventDefault(); createProfile(profile, user.token).then(() => {
       msgAlert({
-        heading: 'Profile Created!', message: m.profPost, variant: 'success'
+        heading: 'Profile Created!',
+        message: m.profPost,
+        variant: 'success'
       }); history.push('/')
-    }).catch(e => {
-      msgAlert({
-        heading: 'Profile Create Failed: ' + e.message, message: m.profPostFail, variant: 'danger'
-      })
-    })
+    }).catch(e => msgAlert({
+      heading: 'Profile Create Failed: ' + e.message,
+      message: m.profPostFail,
+      variant: 'danger'
+    }))
   }; return (
     <section className="text-light">
       <Container>
