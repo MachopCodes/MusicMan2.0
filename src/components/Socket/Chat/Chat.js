@@ -30,6 +30,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       })
       return () => socket.close()
     }, [ENDPOINT, location.search])
+    console.log('socket is: ', socket)
     useEffect(() => {
       socket.on('message', msg => {
         console.log('sending message')
