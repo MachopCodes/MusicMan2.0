@@ -30,16 +30,17 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       })
       return () => socket.close()
     }, [ENDPOINT, location.search])
-    console.log('socket is: ', socket)
     useEffect(() => {
       socket.on('message', msg => {
-        console.log('sending message')
+        console.log('message was heard')
         setMsgs(msgs => [ ...msgs, msg ])
         msgTo(msg, user, to, room); msgFrom(msg, user, to, room).then((res) => setUser(res.data))
       }); socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
     const sendMessage = (e) => {
-      e.preventDefault(); if (msg) { socket.emit('sendMessage', msg, () => setMsg('')) }
+      e.preventDefault()
+      console.log('sending message to the server: ', msg)
+      if (msg) { socket.emit('sendMessage', msg, () => setMsg('')) }
     }; return (
       <div className='outerContainer'>
         <div className='container'>
