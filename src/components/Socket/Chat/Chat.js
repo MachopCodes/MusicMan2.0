@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { msgFrom, msgTo } from '../../../api/message'
-import apiUrl from '../../../api/config'
 import queryString from 'query-string'
-import io from 'socket.io-client'
 
 import Messages from '../Messages/Messages'
 import InfoBar from '../InfoBar/InfoBar'
@@ -10,7 +7,11 @@ import Input from '../Input/Input'
 
 import './Chat.css'
 
+import io from 'socket.io-client/dist/socket.io'
+import { msgFrom, msgTo } from '../../../api/message'
+import apiUrl from '../../../api/config'
 const ENDPOINT = apiUrl
+
 let socket
 
 const Chat = ({ user, location, setUser, opers, setOpers }) => {
@@ -22,6 +23,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     })
     const [msgs, setMsgs] = useState(filteredMessages)
     const [msg, setMsg] = useState('')
+
     useEffect(() => {
       socket = io(ENDPOINT)
       socket.emit('join', { name, room }, (error) => {
@@ -30,13 +32,16 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       })
       return () => socket.close()
     }, [ENDPOINT, location.search])
+
     useEffect(() => {
       socket.on('message', msg => {
         console.log('message was heard')
         setMsgs(msgs => [ ...msgs, msg ])
-        msgTo(msg, user, to, room); msgFrom(msg, user, to, room).then((res) => setUser(res.data))
+        msgTo(msg, user, to, room)
+        msgFrom(msg, user, to, room).then((res) => setUser(res.data))
       }); socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
+
     const sendMessage = (e) => {
       e.preventDefault()
       console.log('sending message to the server: ', msg)
@@ -50,7 +55,9 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
         </div>
       </div>
     )
-  } else { return <section><h6>You must sign in to access this page</h6></section> }
+  } else {
+    return <section><h6>You must sign in to access this page</h6></section>
+  }
 }
 
 export default Chat
