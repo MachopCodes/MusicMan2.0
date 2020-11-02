@@ -7,7 +7,7 @@ import Input from '../Input/Input'
 
 import './Chat.css'
 
-import io from 'socket.io-client/dist/socket.io'
+import io from 'socket.io'
 import { msgFrom, msgTo } from '../../../api/message'
 import apiUrl from '../../../api/config'
 const ENDPOINT = apiUrl
