@@ -39,7 +39,8 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
         setMsgs(msgs => [ ...msgs, msg ])
         msgTo(msg, user, to, room)
         msgFrom(msg, user, to, room).then((res) => setUser(res.data))
-      }); socket.on('roomData', ({ opers }) => setOpers(opers))
+      })
+      socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
     const sendMessage = (e) => {
