@@ -34,7 +34,6 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     }, [ENDPOINT, location.search])
 
     useEffect(() => {
-      console.log('receiving message')
       socket.on('message', msg => {
         console.log('message was heard, socket is: ', socket)
         setMsgs(msgs => [ ...msgs, msg ])
