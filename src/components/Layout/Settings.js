@@ -7,14 +7,21 @@ import ProfileCard from '../Profile/Cards/ProfileCards'
 import { FaUserPlus } from 'react-icons/fa'
 
 const Settings = props => {
-  const { user, msgAlert } = props; const [data, setData] = useState(); if (user) {
+  const { user, msgAlert } = props
+  const [data, setData] = useState()
+  if (user) {
     useEffect(() => {
-      getProfile(user._id).then(res => setData(res.data)).catch(e => {
-        msgAlert({ heading: 'Edit Failure: ' + e.message, message: m.profGetFail, variant: 'danger' })
-      })
-    }, []); let jsx; if (data) {
+      getProfile(user._id).then(res => setData(res.data))
+        .catch(e => msgAlert({
+          heading: 'Edit Failure: ' + e.message,
+          message: m.profGetFail,
+          variant: 'danger'
+        }))
+    }, [])
+    let jsx; if (data) {
       jsx = <ProfileCard {...props} list={data.profile} msgAlert={msgAlert} user={user} />
-    }; return (
+    }
+    return (
       <section>
         <Container>
           <Row>
@@ -38,7 +45,9 @@ const Settings = props => {
         </Container>
       </section>
     )
-  } else { return <section><h6>You must sign in to access this page</h6></section> }
+  } else {
+    return <section><h6>You must sign in to access this page</h6></section>
+  }
 }
 
 export default Settings

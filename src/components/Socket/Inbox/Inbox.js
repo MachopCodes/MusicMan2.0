@@ -31,7 +31,7 @@ const Inbox = props => {
                   <ListGroup.Item key={p.name} className="listgroup">
                     <Container>
                       <Row>
-                        <Col><Button href={`#chat?name=${user.name}&room=${p.name}&to=${p.id}`} variant="outline-success" value={p.id}><FaReply/></Button></Col>
+                        <Col><Button href={`#chat?name=${user.name}&room=${p.name}&to=${p.id}`} variant="outline-success"><FaReply/></Button></Col>
                         <Col className="center"><h6 >{p.name}</h6></Col>
                         <Col className="right"><Button variant="outline-danger" onClick={click} value={p.id}><FaTrash/></Button></Col>
                       </Row>

@@ -14,9 +14,10 @@ const ENDPOINT = apiUrl
 
 let socket
 
-const Chat = ({ user, location, setUser, opers, setOpers }) => {
+const Chat = ({ user, location, setUser, opers, setOpers, to }) => {
   if (user) {
-    const { name, room, to } = queryString.parse(location.search)
+    const { name, room } = queryString.parse(location.search)
+    const receiverName = room.substr(0, room.indexOf(' '))
     const filteredMessages = []
     user.messages.map(m => {
       if (m.receiverId === to || m.senderId === to) { filteredMessages.push(m) }
@@ -27,7 +28,6 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     useEffect(() => {
       socket = io(ENDPOINT)
       socket.emit('join', { name, room }, (error) => {
-        console.log('joining room')
         if (error) { alert(error) }
       })
       return () => socket.close()
@@ -35,22 +35,20 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
 
     useEffect(() => {
       socket.on('message', msg => {
-        console.log('message was heard, socket is: ', socket)
         setMsgs(msgs => [ ...msgs, msg ])
-        msgTo(msg, user, to, room)
-        msgFrom(msg, user, to, room).then((res) => setUser(res.data))
+        msgTo(msg, user, to, receiverName, room)
+        msgFrom(msg, user, to, receiverName, room).then((res) => setUser(res.data))
       })
       socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
     const sendMessage = (e) => {
       e.preventDefault()
-      console.log('sending message to the server: ', msg)
       if (msg) { socket.emit('sendMessage', msg, () => setMsg('')) }
     }; return (
       <div className='outerContainer'>
         <div className='container'>
-          <InfoBar room={room} />
+          <InfoBar room={receiverName} />
           <Messages to={to} messages={msgs} name={name} />
           <Input message={msg} setMessage={setMsg} sendMessage={sendMessage} />
         </div>

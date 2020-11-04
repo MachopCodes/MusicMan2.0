@@ -7,7 +7,7 @@ import Star from '../../Review/Star'
 import { FaUserEdit } from 'react-icons/fa'
 
 const ProfileCard = props => {
-  const { list, msgAlert, user } = props
+  const { list, msgAlert, user, setReceiver } = props
   const jsx = (
     <Fragment>{list.map(p => (
       <div key={p._id}>
@@ -49,7 +49,7 @@ const ProfileCard = props => {
               <Card.Footer className="myaccordion align-items-center d-flex justify-content-center border-0">
                 {user && user._id === p.owner._id
                   ? <Link to={`/profiles/${p._id}`}><Button variant="outline-success" className="mr-auto"><FaUserEdit/> Edit Profile</Button></Link>
-                  : <ReviewPost {...props} profile={p} user={user} msgAlert={msgAlert}/>}
+                  : <ReviewPost {...props} profile={p} user={user} msgAlert={msgAlert} setReceiver={setReceiver} />}
               </Card.Footer>
             </Card>
           </Accordion>

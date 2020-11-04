@@ -44,7 +44,7 @@ const Search = props => {
   )
   let card; if (data) {
     data.profiles.length > 1
-      ? card = <ProfileCard {...props} list={data.profiles}/>
+      ? card = <ProfileCard {...props} list={data.profiles} setReceiver={props.setReceiver}/>
       : card = (
         <Fragment>
           <AutoDismissAlert variant="info" heading="no profiles matched your search, please try again"/>

@@ -15,13 +15,10 @@ class SignIn extends Component {
   onSignIn = e => {
     e.preventDefault(); const { msgAlert, history, setUser } = this.props
     signIn(this.state).then(res => setUser(res.data.user)).then(() => {
-      msgAlert({
-        heading: 'Sign In Success', message: m.signIn, variant: 'success'
-      }); history.push('/')
+      msgAlert({ heading: 'Sign In Success', message: m.signIn, variant: 'success' }); history.push('/')
     }).catch(e => {
-      this.setState({ email: '', password: '' }); msgAlert({
-        heading: 'Sign In Failed with error: ' + e.message, message: m.signInFail, variant: 'danger'
-      })
+      this.setState({ email: '', password: '' })
+      msgAlert({ heading: 'Sign In Failed with error: ' + e.message, message: m.signInFail, variant: 'danger' })
     })
   }; render () {
     return (
