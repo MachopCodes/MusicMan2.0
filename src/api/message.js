@@ -1,33 +1,19 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const msgFrom = (message, user, to, receiverName) => {
+export const saveMessage = (data) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/messagefrom',
-    headers: { 'Authorization': 'Token token=' + user.token },
-    data: {
-      receiverName: receiverName,
-      receiverId: to,
-      senderName: user.name,
-      senderId: user._id,
-      text: message.text
-    }
+    url: apiUrl + '/message',
+    data
   })
 }
 
-export const msgTo = (message, user, to, receiverName) => {
+export const textFrom = (data) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/messageto',
-    headers: { 'Authorization': 'Token token=' + user.token },
-    data: {
-      receiverName: receiverName,
-      receiverId: to,
-      senderName: user.name,
-      senderId: user._id,
-      text: message.text
-    }
+    data
   })
 }
 

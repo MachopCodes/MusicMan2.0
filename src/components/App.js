@@ -42,7 +42,7 @@ class App extends Component {
         ))}
         <main>
           <Route path='/chat' render={(props) => (
-            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers} to={receiver} />
+            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers} receiver={receiver} />
           )} />
           <Route exact path='/' render={(props) => (
             <Search user={user} msgAlert={this.msgAlert} setReceiver={this.setReceiver} />

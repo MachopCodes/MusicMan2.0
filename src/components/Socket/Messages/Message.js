@@ -4,9 +4,9 @@ import ReactEmoji from 'react-emoji'
 
 const Message = ({ message, name }) => {
   let isSentByCurrentOper = false
-  const trimmedSender = !message.oper ? message.senderName.trim().toLowerCase() : null
-  const trimmedReceiver = !message.oper ? message.receiverName.toLowerCase() : null
-  if (name === message.senderName || name.trim().toLowerCase() === message.oper) {
+  const trimmedSender = !message.oper ? message.self.trim().toLowerCase() : null
+  const trimmedReceiver = !message.oper ? message.recipient.toLowerCase() : null
+  if (name === message.self || name.trim().toLowerCase() === message.oper) {
     isSentByCurrentOper = true
   }; return (isSentByCurrentOper
     ? (

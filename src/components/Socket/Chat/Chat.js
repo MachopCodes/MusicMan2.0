@@ -8,49 +8,49 @@ import Input from '../Input/Input'
 import './Chat.css'
 
 import io from 'socket.io-client'
-import { msgFrom, msgTo } from '../../../api/message'
+import { saveMessage } from '../../../api/message'
 import apiUrl from '../../../api/config'
 const ENDPOINT = apiUrl
 
 let socket
 
-const Chat = ({ user, location, setUser, opers, setOpers, to }) => {
+const Chat = ({ user, location, setUser, opers, setOpers }) => {
+  console.log(user)
   if (user) {
     const { name, room } = queryString.parse(location.search)
-    const receiverName = room.substr(0, room.indexOf(' '))
-    const filteredMessages = []
-    user.messages.map(m => {
-      if (m.receiverId === to || m.senderId === to) { filteredMessages.push(m) }
-    })
-    const [msgs, setMsgs] = useState(filteredMessages)
-    const [msg, setMsg] = useState('')
+    const recipient = room.substr(0, room.indexOf(' '))
+    const filter = user.messages.filter(m => (recipient === m.recipient))
+    const [messages, setMessages] = useState(filter)
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
       socket = io(ENDPOINT)
       socket.emit('join', { name, room }, (error) => {
-        if (error) { alert(error) }
-      })
-      return () => socket.close()
+        if (error) alert(error)
+      }); return () => socket.close()
     }, [ENDPOINT, location.search])
 
     useEffect(() => {
-      socket.on('message', msg => {
-        setMsgs(msgs => [ ...msgs, msg ])
-        msgTo(msg, user, to, receiverName, room)
-        msgFrom(msg, user, to, receiverName, room).then((res) => setUser(res.data))
-      })
-      socket.on('roomData', ({ opers }) => setOpers(opers))
+      socket.on('message', message => {
+        const data = { name, recipient, room, message }
+        setMessages(messages => [ ...messages, message ])
+        saveMessage(data).then((res) => {
+          console.log('res data is', res.data)
+          setUser(res.data)
+        })
+      }); socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
     const sendMessage = (e) => {
       e.preventDefault()
-      if (msg) { socket.emit('sendMessage', msg, () => setMsg('')) }
-    }; return (
+      if (message) socket.emit('sendMessage', message, () => setMessage(''))
+    }
+    return (
       <div className='outerContainer'>
         <div className='container'>
-          <InfoBar room={receiverName} />
-          <Messages to={to} messages={msgs} name={name} />
-          <Input message={msg} setMessage={setMsg} sendMessage={sendMessage} />
+          <InfoBar recipient={recipient} />
+          <Messages messages={messages} name={name} />
+          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
         </div>
       </div>
     )
