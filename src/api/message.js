@@ -1,49 +1,34 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const msgFrom = (message, user, to, room) => {
+export const saveMessage = (data) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/messagefrom',
-    headers: { 'Authorization': 'Token token=' + user.token },
-    data: {
-      receiverName: room,
-      receiverId: to,
-      senderName: user.name,
-      senderId: user._id,
-      text: message.text
-    }
+    url: apiUrl + '/message',
+    data
   })
 }
 
-export const msgTo = (message, user, to, room) => {
+export const textFrom = (data) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/messageto',
-    headers: { 'Authorization': 'Token token=' + user.token },
-    data: {
-      receiverName: room,
-      receiverId: to,
-      senderName: user.name,
-      senderId: user._id,
-      text: message.text
-    }
+    data
   })
 }
 
-export const deleteMessage = (data, user) => {
-  console.log('data is: ', data)
+export const deleteMessage = (messageId, user) => {
   return axios({
     method: 'DELETE',
-    url: apiUrl + '/messages/' + user._id,
+    url: apiUrl + '/message/' + user._id,
     headers: { 'Authorization': 'Token token=' + user.token },
-    data: { profileId: data }
+    data: { messageId }
   })
 }
 
 export const getUser = id => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/get-user/' + id
+    url: apiUrl + '/message/' + id
   })
 }

@@ -5,6 +5,7 @@ import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
 import Search from './Layout/Search'
 import Header from './Layout/Header'
+import Footer from './Layout/Footer'
 import Settings from './Layout/Settings'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
@@ -16,14 +17,25 @@ import Inbox from './Socket/Inbox/Inbox'
 import Chat from './Socket/Chat/Chat'
 
 class App extends Component {
-  constructor () { super(); this.state = { user: null, opers: [], profile: null, msgAlerts: [] } }
-  setUser = user => this.setState({ user }); clearUser = () => this.setState({ user: null })
-  setOpers = oper => this.setState([{ oper }]); clearOper = () => this.setState({ oper: [] })
-  setProfile = profile => this.setState({ profile }); clearProfile = () => this.setState({ profile: null })
-  msgAlert = ({ heading, message, variant }) => {
-    this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
-  }; render () {
-    const { msgAlerts, user, opers } = this.state; return (
+  constructor () {
+    super(); this.state = {
+      user: null,
+      profile: null,
+      receiver: null,
+      msgAlerts: [],
+      opers: []
+    }
+  }
+  setUser = user => this.setState({ user })
+  clearUser = () => this.setState({ user: null })
+  setOpers = oper => this.setState([{ oper }])
+  setReceiver = (receiver) => this.setState({ receiver: receiver })
+
+  msgAlert = ({ heading, message, variant }) => this.setState({
+    msgAlerts: [...this.state.msgAlerts, { heading, message, variant }]
+  })
+  render () {
+    const { msgAlerts, user, opers, receiver } = this.state; return (
       <Fragment>
         <Header user={user} />
         {msgAlerts.map((alert, i) => (
@@ -31,10 +43,10 @@ class App extends Component {
         ))}
         <main>
           <Route path='/chat' render={(props) => (
-            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers}/>
+            <Chat {...props} user={user} setUser={this.setUser} opers={opers} setOpers={this.setOpers} receiver={receiver} />
           )} />
           <Route exact path='/' render={(props) => (
-            <Search user={user} msgAlert={this.msgAlert}/>
+            <Search user={user} msgAlert={this.msgAlert} setReceiver={this.setReceiver} />
           )} />
           <Route exact path='/settings' render={(props) => (
             <Settings user={user} msgAlert={this.msgAlert}/>
@@ -61,6 +73,7 @@ class App extends Component {
             <Inbox {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
         </main>
+        <Footer/>
       </Fragment>
     )
   }

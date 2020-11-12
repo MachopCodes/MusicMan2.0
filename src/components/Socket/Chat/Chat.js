@@ -8,7 +8,7 @@ import Input from '../Input/Input'
 import './Chat.css'
 
 import io from 'socket.io-client'
-import { msgFrom, msgTo } from '../../../api/message'
+import { saveMessage } from '../../../api/message'
 import apiUrl from '../../../api/config'
 const ENDPOINT = apiUrl
 
@@ -16,43 +16,42 @@ let socket
 
 const Chat = ({ user, location, setUser, opers, setOpers }) => {
   if (user) {
-    const { name, room, to } = queryString.parse(location.search)
-    const filteredMessages = []
-    user.messages.map(m => {
-      if (m.receiverId === to || m.senderId === to) { filteredMessages.push(m) }
-    })
-    const [msgs, setMsgs] = useState(filteredMessages)
-    const [msg, setMsg] = useState('')
+    const { name, room } = queryString.parse(location.search)
+    let recipient
+    const personOne = room.substr(0, room.indexOf(' and '))
+    const personTwo = room.substr(room.indexOf(' and ') + 5, room.length)
+    personOne === user.name ? recipient = personTwo : recipient = personOne
+    let msgHist = user.messages.filter(m => (recipient === m.recipient))
+    if (msgHist.length > 0) msgHist = msgHist[0].message
+    const [messages, setMessages] = useState(msgHist)
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
       socket = io(ENDPOINT)
       socket.emit('join', { name, room }, (error) => {
-        console.log('joining room')
-        if (error) { alert(error) }
-      })
-      return () => socket.close()
+        if (error) alert(error)
+      }); return () => socket.close()
     }, [ENDPOINT, location.search])
 
     useEffect(() => {
-      socket.on('message', msg => {
-        console.log('message was heard, socket is: ', socket)
-        setMsgs(msgs => [ ...msgs, msg ])
-        msgTo(msg, user, to, room)
-        msgFrom(msg, user, to, room).then((res) => setUser(res.data))
-      })
-      socket.on('roomData', ({ opers }) => setOpers(opers))
+      socket.on('message', message => {
+        const data = { name, recipient, room, message }
+        setMessages(messages => [ ...messages, message ])
+        saveMessage(data).then((res) => setUser(res.data))
+      }); socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
     const sendMessage = (e) => {
       e.preventDefault()
-      console.log('sending message to the server: ', msg)
-      if (msg) { socket.emit('sendMessage', msg, () => setMsg('')) }
-    }; return (
+      if (message) socket.emit('sendMessage', message, () => setMessage(''))
+    }
+
+    return (
       <div className='outerContainer'>
         <div className='container'>
-          <InfoBar room={room} />
-          <Messages to={to} messages={msgs} name={name} />
-          <Input message={msg} setMessage={setMsg} sendMessage={sendMessage} />
+          <InfoBar recipient={recipient} />
+          <Messages messages={messages} name={name} />
+          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
         </div>
       </div>
     )
