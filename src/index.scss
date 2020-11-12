@@ -23,11 +23,12 @@
 }
 
 .app-name {
-  color: #90EE90;
-  font-size: 30px;
+  color: white;
+  outline-color: coral;
+  font-size: 20px;
   display: inline-flex;
-  margin-left: 15px;
-  text-shadow: 1px 1px #90EE90;
+  margin-left: 5px;
+  text-shadow: 1px 1px green;
 }
 
 .small-text {
@@ -49,4 +50,9 @@ input[type="radio"] {
 .star {
   cursor: pointer;
   transition: color 200ms;
+}
+
+.logo-img {
+  width: 6%;
+  height: 6%;
 }

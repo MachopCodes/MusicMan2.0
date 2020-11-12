@@ -17,19 +17,18 @@ export const textFrom = (data) => {
   })
 }
 
-export const deleteMessage = (data, user) => {
-  console.log('data is: ', data)
+export const deleteMessage = (messageId, user) => {
   return axios({
     method: 'DELETE',
-    url: apiUrl + '/messages/' + user._id,
+    url: apiUrl + '/message/' + user._id,
     headers: { 'Authorization': 'Token token=' + user.token },
-    data: { profileId: data }
+    data: { messageId }
   })
 }
 
 export const getUser = id => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/get-user/' + id
+    url: apiUrl + '/message/' + id
   })
 }

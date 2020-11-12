@@ -5,6 +5,7 @@ import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
 import Search from './Layout/Search'
 import Header from './Layout/Header'
+import Footer from './Layout/Footer'
 import Settings from './Layout/Settings'
 import SignUp from './Auth/SignUp'
 import SignIn from './Auth/SignIn'
@@ -72,6 +73,7 @@ class App extends Component {
             <Inbox {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
         </main>
+        <Footer/>
       </Fragment>
     )
   }
