@@ -4,14 +4,11 @@ import ReactEmoji from 'react-emoji'
 
 const Message = ({ message, name }) => {
   let isSentByCurrentOper = false
-  const trimmedSender = !message.oper ? message.self.trim().toLowerCase() : null
-  const trimmedReceiver = !message.oper ? message.recipient.toLowerCase() : null
-  if (name === message.self || name.trim().toLowerCase() === message.oper) {
-    isSentByCurrentOper = true
-  }; return (isSentByCurrentOper
+  if (name.toLowerCase() === message.oper) isSentByCurrentOper = true
+  return (isSentByCurrentOper
     ? (
       <div className="messageContainer justifyEnd">
-        <p className="sentText pr-10">{message.oper ? message.oper : name}</p>
+        <p className="sentText pr-10">{message.oper}</p>
         <div className="messageBox backgroundBlue">
           <p className="messageText colorWhite">{ReactEmoji.emojify(message.text)}</p>
         </div>
@@ -22,10 +19,7 @@ const Message = ({ message, name }) => {
         <div className="messageBox backgroundLight">
           <p className="messageText colorDark">{ReactEmoji.emojify(message.text)}</p>
         </div>
-        <p className="sentText pl-10 ">{message.oper
-          ? message.oper
-          : trimmedReceiver === name
-            ? trimmedReceiver : trimmedSender}</p>
+        <p className="sentText pl-10 ">{message.oper}</p>
       </div>
     )
   )

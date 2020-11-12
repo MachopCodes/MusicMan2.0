@@ -15,12 +15,15 @@ const ENDPOINT = apiUrl
 let socket
 
 const Chat = ({ user, location, setUser, opers, setOpers }) => {
-  console.log(user)
   if (user) {
     const { name, room } = queryString.parse(location.search)
-    const recipient = room.substr(0, room.indexOf(' '))
-    const filter = user.messages.filter(m => (recipient === m.recipient))
-    const [messages, setMessages] = useState(filter)
+    let recipient
+    const personOne = room.substr(0, room.indexOf(' and '))
+    const personTwo = room.substr(room.indexOf(' and ') + 5, room.length)
+    personOne === user.name ? recipient = personTwo : recipient = personOne
+    let msgHist = user.messages.filter(m => (recipient === m.recipient))
+    if (msgHist.length > 0) msgHist = msgHist[0].message
+    const [messages, setMessages] = useState(msgHist)
     const [message, setMessage] = useState('')
 
     useEffect(() => {
@@ -34,10 +37,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       socket.on('message', message => {
         const data = { name, recipient, room, message }
         setMessages(messages => [ ...messages, message ])
-        saveMessage(data).then((res) => {
-          console.log('res data is', res.data)
-          setUser(res.data)
-        })
+        saveMessage(data).then((res) => setUser(res.data))
       }); socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
@@ -45,6 +45,7 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
       e.preventDefault()
       if (message) socket.emit('sendMessage', message, () => setMessage(''))
     }
+
     return (
       <div className='outerContainer'>
         <div className='container'>
