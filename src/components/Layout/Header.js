@@ -4,8 +4,8 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const auth = (
   <Fragment>
-    <Nav.Link href="#settings">Account Settings</Nav.Link>
-    <Nav.Link href="#messages">Inbox</Nav.Link>
+    <Nav.Link href="#settings">Account</Nav.Link>
+    <Nav.Link href="#messages">Messages</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
 )
@@ -15,7 +15,7 @@ const search = <Nav.Link href="#/">Search</Nav.Link>
 
 const Header = ({ user }) => (
   <Navbar bg="light" variant="light" expand="md">
-    <Navbar.Brand href="#" className="app-name">musicman</Navbar.Brand>
+    <Navbar.Brand href="#" className="brand-nav">musicman</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">

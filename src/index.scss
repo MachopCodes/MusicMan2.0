@@ -1,10 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 #root {
-  background: rgb(6,97,60);
   background-image: url('./icons/notes.jpg');
   height: 100%;
-  background-size: 500px;
+  background-size: 1200px;
   background-position: center;
   background-repeat: repeat;
 }
@@ -18,17 +17,16 @@
   text-align: right;
 }
 
+.text-cneter {
+  text-align: center;
+}
+
 .italic {
   font-style: italic;
 }
 
-.app-name {
-  color: white;
-  outline-color: coral;
-  font-size: 20px;
-  display: inline-flex;
-  margin-left: 5px;
-  text-shadow: 1px 1px green;
+.bold {
+  font-weight: bold;
 }
 
 .small-text {
@@ -40,7 +38,7 @@
 }
 
 section {
-  padding: 8rem 2rem 8rem 2rem;
+  padding: 4rem 2rem 12rem 2rem;
 }
 
 input[type="radio"] {
@@ -53,6 +51,30 @@ input[type="radio"] {
 }
 
 .logo-img {
-  width: 6%;
-  height: 6%;
+  width: 10%;
+  height: 10%;
+}
+
+.brand-name {
+  font-size: 4rem;
+	text-align: center;
+  color: black;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px #eb452b,
+              2px 2px 0px #efa032,
+              3px 3px 0px #46b59b,
+              4px 4px 0px #017e7f,
+              5px 5px 0px #052939,
+}
+
+.brand-nav {
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  font-weight: 700;
+  text-shadow: .5px .5px 0px #eb452b,
+              1px 1px 0px #efa032,
+              1.5px 1.5px 0px #46b59b,
+              2px 2px 0px #017e7f,
+              2.5px 2.5px 0px #052939,
 }

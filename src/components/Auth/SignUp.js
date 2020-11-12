@@ -7,33 +7,45 @@ import Email from './Form/Email'
 import Password from './Form/Password'
 import Name from './Form/Name'
 import PassConf from './Form/PassConf'
+import Loading from '../Layout/Loading'
 
 class SignUp extends Component {
   constructor () {
-    super(); this.state = { name: '', email: '', password: '', passConf: '' }
-  }; change = e => this.setState({ [e.target.name]: e.target.value }); onSignUp = e => {
-    e.preventDefault(); const { msgAlert, history, setUser } = this.props
+    super(); this.state = { name: '', email: '', password: '', passConf: '', clicked: false }
+  }
+  change = e => this.setState({ [e.target.name]: e.target.value })
+  onSignUp = e => {
+    e.preventDefault(); this.setState({ clicked: true })
+    const { msgAlert, history, setUser } = this.props
     signUp(this.state).then(() => signIn(this.state)).then(res => {
-      setUser(res.data.user); msgAlert({
-        heading: 'Sign Up Success', message: m.signUp, variant: 'success'
-      }); history.push('/')
+      setUser(res.data.user)
+      msgAlert({ heading: 'Sign Up Success', message: m.signUp, variant: 'success' })
+      history.push('/')
     }).catch(e => {
-      this.setState({ name: '', email: '', password: '', passConf: '' }); msgAlert({
-        heading: 'Sign Up Failed with error: ' + e.message, message: m.signUpFail, variant: 'danger'
+      this.setState({ name: '', email: '', password: '', passConf: '', clicked: false })
+      msgAlert({
+        heading: 'Sign Up Failed with error: ' + e.message,
+        message: m.signUpFail,
+        variant: 'danger'
       })
     })
-  }; render () {
-    const { email, name, password, passConf } = this.state; return (
+  }
+  render () {
+    const { clicked, email, name, password, passConf } = this.state
+    return (
       <section>
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+              <h2 className="text-center">Sign Up</h2>
               <Form onSubmit={this.onSignUp}>
-                <Name name={name} change={this.change}/>
                 <Email email={email} change={this.change}/>
+                <Name name={name} change={this.change}/>
                 <Password password={password} change={this.change}/>
                 <PassConf passConf={passConf} change={this.change}/>
-                <Button variant="info btn-block" type="submit">Sign Up</Button>
+                <Button variant="info btn-block" type="submit">
+                  {clicked ? <Loading/> : <span>sign up</span>}
+                </Button>
               </Form>
             </Col>
           </Row>

@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap'
 import m from '../AutoDismissAlert/messages'
 import { createReview } from '../../api/review'
 import StarRating from './StarRating'
-import { FaComments, FaStar } from 'react-icons/fa'
+import { FaComments, FaStar, FaSave } from 'react-icons/fa'
 
 const ReviewPost = props => {
   const { profile, user, msgAlert, setReceiver } = props
@@ -20,12 +20,10 @@ const ReviewPost = props => {
     })
     const handleChange = e => setReview({ ...review, ...{ [e.target.name]: e.target.value } })
     const handleSubmit = e => {
-      e.preventDefault(); createReview(review, user.token).then(() => {
-        msgAlert({
-          heading: 'Review Created!',
-          message: m.reviewPost,
-          variant: 'success'
-        }); handleClose()
+      e.preventDefault()
+      createReview(review, user.token).then(() => {
+        msgAlert({ heading: 'Review Created!', message: m.reviewPost, variant: 'success' })
+        handleClose()
       }).catch(e => msgAlert({
         heading: 'Review Failed: ' + e.message,
         message: m.reviewPostFail,
@@ -41,10 +39,13 @@ const ReviewPost = props => {
         </Button>
         <Button variant="outline-info" onClick={handleShow}><FaStar/> Review</Button>
         <Modal centered show={show} onHide={handleClose}>
-          <Modal.Header closeButton><Modal.Title>Post Review</Modal.Title></Modal.Header>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {profile.owner.name}  <StarRating review={review} setReview={setReview}/>
+            </Modal.Title>
+          </Modal.Header>
           <Form onSubmit={handleSubmit}>
             <Modal.Body>
-              <StarRating review={review} setReview={setReview} />
               <Form.Group controlId="content">
                 <Form.Control
                   as="textarea" name="content" rows="3"
@@ -52,7 +53,7 @@ const ReviewPost = props => {
                   placeholder="Tell us what you think!"/>
               </Form.Group>
             </Modal.Body>
-            <Modal.Footer><Button type="Submit" variant="primary">Save</Button></Modal.Footer>
+            <Modal.Footer><Button type="Submit" variant="primary"><FaSave/></Button></Modal.Footer>
           </Form>
         </Modal>
       </div>

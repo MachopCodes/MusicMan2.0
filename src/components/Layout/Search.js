@@ -9,8 +9,10 @@ import City from '../Profile/Form/City'
 import Instruments from '../Profile/Form/Instruments'
 import Interests from '../Profile/Form/Interests'
 import State from '../Profile/Form/State'
+import Loading from './Loading'
 
 const Search = props => {
+  const [clicked, setClicked] = useState(false)
   const [data, setData] = useState()
   const [profile, setProfile] = useState({
     instrument: '',
@@ -25,25 +27,33 @@ const Search = props => {
   }
 
   const handleSubmit = e => {
-    e.preventDefault(); const fetchData = async () => {
+    e.preventDefault()
+    setClicked(true)
+    const fetchData = async () => {
       const res = await axios({
         method: 'GET', url: apiUrl + '/profiles', params: { profile }
       }); setData(await res.data)
     }; fetchData().catch((err) => console.log(err))
   }
-
-  const search = (
+  const search = <span><FaSearch/>  Search for local musicians</span>
+  const searchForm = (
     <Fragment>
+      <h1 className="brand-name text-center">musicman</h1>
+      <p className="text-center small-text bold">A place for musicians to connect for music lessons, gigs, or jams.
+      </p>
       <Form onSubmit={handleSubmit}><Instruments change={handleChange}/>
         <Interests change={handleChange}/>
         <State change={handleChange} state={profile.state}/>
         <City change={handleChange} city={profile.city}/>
-        <Button type="Submit" variant="info btn-block"><FaSearch/>  Search for local musicians</Button>
+        <Button type="Submit" variant="info btn-block">{
+          clicked ? data ? search : <Loading/> : search
+        }</Button>
       </Form>
     </Fragment>
   )
-  let card; if (data) {
-    data.profiles.length > 1
+  let card
+  data
+    ? data.profiles.length > 1
       ? card = <ProfileCard {...props} list={data.profiles} setReceiver={props.setReceiver}/>
       : card = (
         <Fragment>
@@ -53,11 +63,12 @@ const Search = props => {
           </div>
         </Fragment>
       )
-  }; return (
+    : card = (<div></div>)
+  return (
     <section>
       <Container>
         <Row>
-          <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">{search}<br/><br/>{card}</Col>
+          <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">{searchForm}<br/>{card}</Col>
         </Row>
       </Container>
     </section>

@@ -23,6 +23,7 @@ class ChangePassword extends Component {
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+              <h2 className="text-center">Sign In</h2>
               <Form onSubmit={this.onChangePassword}>
                 <Form.Group controlId="oldPassword">
                   <Form.Control

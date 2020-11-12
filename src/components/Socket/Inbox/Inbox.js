@@ -37,6 +37,7 @@ const Inbox = props => {
             </Col>
           </Row>
         </Container>
+        <br/><br/><br/><br/><br/>
       </section>
     )
     : <section><h4 className="text-center">No messages</h4></section>

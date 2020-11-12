@@ -6,7 +6,7 @@ const Loading = () => (
     <Container>
       <Row>
         <Col className="d-flex justify-content-center mx-auto">
-          <Spinner animation="grow" variant="light"/>
+          <Spinner animation="border" variant="white" />
         </Col>
       </Row>
     </Container>

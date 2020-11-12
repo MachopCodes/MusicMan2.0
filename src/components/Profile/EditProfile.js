@@ -27,10 +27,11 @@ const EditProfile = props => {
       msgAlert({ heading: 'Edit Failure: ' + e.message, message: m.profPatchFail, variant: 'danger' })
     })
   }; return (
-    <section className="text-light">
+    <section>
       <Container>
         <Row>
           <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+            <h2 className="text-center">Edit Profile</h2>
             <Form onSubmit={handleSubmit}>
               <City city={profile.city} change={handleChange}/>
               <State state={profile.state} change={handleChange}/>
@@ -38,7 +39,7 @@ const EditProfile = props => {
               <Interests change={handleChange}/>
               <Blurb blurb={profile.blurb} change={handleChange}/>
               <Row>
-                <Col><Button type="Submit" variant="outline-success btn-block" className="mr-auto"><FaUserEdit/></Button></Col>
+                <Col><Button type="Submit" variant="success btn-block" className="mr-auto"><FaUserEdit/></Button></Col>
                 <Col><DeleteProfile {...props} /></Col>
               </Row>
             </Form>

@@ -7,12 +7,21 @@ import { FaTrash } from 'react-icons/fa'
 
 const DeleteProfile = props => {
   const handleSubmit = e => {
-    e.preventDefault(); deleteProfile(props.match.params.id, props.user.token).then(() => props.msgAlert({
-      heading: 'Delete Success', message: m.profDel, variant: 'success'
-    })).then(() => props.history.push('/')).catch(e => props.msgAlert({
-      heading: 'Failed to delete: ' + e.message, message: m.profDelFail, variant: 'danger'
-    }))
-  }; return <Button variant="outline-danger btn-block" onClick={handleSubmit}><FaTrash/></Button>
+    e.preventDefault()
+    deleteProfile(props.match.params.id, props.user.token)
+      .then(() => props.msgAlert({
+        heading: 'Delete Success',
+        message: m.profDel,
+        variant: 'success'
+      }))
+      .then(() => props.history.push('/'))
+      .catch(e => props.msgAlert({
+        heading: 'Failed to delete: ' + e.message,
+        message: m.profDelFail,
+        variant: 'danger'
+      }))
+  }
+  return <Button variant="danger btn-block" onClick={handleSubmit}><FaTrash/></Button>
 }
 
 export default withRouter(DeleteProfile)
