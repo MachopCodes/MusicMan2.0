@@ -73,7 +73,7 @@ class App extends Component {
             <Inbox {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
         </main>
-        <Footer/>
+        <Footer user={user}/>
       </Fragment>
     )
   }
