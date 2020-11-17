@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { getProfile } from '../../api/profile'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import m from '../AutoDismissAlert/messages'
-import ProfileCard from '../Profile/Cards/ProfileCards'
+import ProfileCard from '../Profile/ProfileCards'
 import { FaUserPlus } from 'react-icons/fa'
 
 const Settings = props => {

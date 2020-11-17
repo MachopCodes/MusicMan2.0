@@ -5,22 +5,19 @@ import { FaSearch, FaUser, FaEnvelope, FaSignOutAlt, FaSignInAlt } from 'react-i
 
 const auth = (
   <Fragment>
-    <Nav.Link href="#settings"><FaUser/></Nav.Link>
+    <Nav.Link className="settings" href="#settings"><FaUser/></Nav.Link>
     <Nav.Link href="#messages"><FaEnvelope/></Nav.Link>
-    <Nav.Link href="#sign-out"><FaSignOutAlt/></Nav.Link>
+    <Nav.Link className="sign-out" href="#sign-out"><FaSignOutAlt/></Nav.Link>
   </Fragment>
 )
 
-const signIn = <Nav.Link href="#sign-in"><FaSignInAlt/></Nav.Link>
-const search = <Nav.Link href="#/"><FaSearch/></Nav.Link>
+const signIn = <Nav.Link className="sign-in" href="#sign-in"><FaSignInAlt/></Nav.Link>
+const search = <Nav.Link className="search" href="#/"><FaSearch/></Nav.Link>
 
 const Header = ({ user }) => (
   <Navbar sticky="top" bg="light" variant="light" expand="md">
     <Navbar.Brand href="#" className="brand-nav">musicman</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">{ search }{ user ? auth : signIn }</Nav>
-    </Navbar.Collapse>
+    <Nav className="ml-auto">{ search }{ user ? auth : signIn }</Nav>
   </Navbar>
 )
 

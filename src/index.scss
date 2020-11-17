@@ -8,35 +8,6 @@
   background-repeat: repeat;
 }
 
-.myaccordion {
-  border-bottom-color: #EDEFF0;
-  background: transparent;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-cneter {
-  text-align: center;
-}
-
-.italic {
-  font-style: italic;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.small-text {
-  font-size: x-small;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
 section {
   padding: 2rem 2rem 12rem 2rem;
 }
@@ -45,17 +16,8 @@ input[type="radio"] {
   display: none;
 }
 
-.star {
-  cursor: pointer;
-  transition: color 200ms;
-}
-
-.logo-img {
-  width: 12%;
-  height: 12%;
-}
-
 .brand-name {
+  cursor: pointer;
   font-size: 3rem;
 	text-align: center;
   color: black;
@@ -77,4 +39,78 @@ input[type="radio"] {
               1.5px 1.5px 0px #46b59b,
               2px 2px 0px #017e7f,
               2.5px 2.5px 0px #052939,
+}
+.nav-logo {
+  display: inline-block;
+  align-self: flex-end;
+  width: 25%;
+  height: 25%;
+}
+
+.logo-img {
+  width: 30px;
+  height: 30px;
+}
+
+.myaccordion {
+  border-bottom-color: #EDEFF0;
+  background: transparent;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+
+
+@media (min-width: 275px) {
+  .navbar-expand-md .navbar-nav {
+      flex-direction: row;
+  }
+}
+
+@media (min-width: 275px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+  }
+}
+
+
+
+.sign-in:hover {
+  color: LimeGreen !important;
+}
+
+.search:hover {
+  color: DarkTurquoise !important;
+}
+
+.settings:hover {
+  color: Indigo !important;
+}
+
+.sign-out:hover {
+  color: IndianRed !important;
+}
+
+
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.italic {
+  font-style: italic;
+}
+.bold {
+  font-weight: bold;
+}
+.small-text {
+  font-size: x-small;
+}
+.space-between {
+  justify-content: space-between;
 }

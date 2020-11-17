@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Spinner, Container, Row, Col } from 'react-bootstrap'
 
 const Loading = () => (
-  <Fragment className="mx-auto">
+  <Fragment>
     <Container>
       <Row>
         <Col className="d-flex justify-content-center mx-auto">

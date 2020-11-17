@@ -4,23 +4,25 @@ import apiUrl from '../../api/config'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import { Badge, Button, Form, Container, Row, Col } from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
-import ProfileCard from '../Profile/Cards/ProfileCards'
-import City from '../Profile/Form/City'
-import Instruments from '../Profile/Form/Instruments'
-import Interests from '../Profile/Form/Interests'
-import State from '../Profile/Form/State'
-import Loading from './Loading'
+import ProfileCard from './ProfileCards'
+import City from './Form/City'
+import Instruments from './Form/Instruments'
+import Interests from './Form/Interests'
+import State from './Form/State'
+import Loading from '../Layout/Loading'
 
 const Search = props => {
   const [clicked, setClicked] = useState(false)
   const [data, setData] = useState()
   const [profile, setProfile] = useState({
-    instrument: '',
-    interest: '',
-    city: '',
-    state: ''
+    instrument: '', interest: '', city: '', state: ''
   })
 
+  const resetSearch = () => {
+    setProfile({ instrument: '', interest: '', city: '', state: '' })
+    document.getElementById('state').selectedIndex = 0
+    document.getElementById('instrument').selectedIndex = 0
+  }
   const handleChange = e => {
     const updatedField = { [e.target.name]: e.target.value }
     setProfile({ ...profile, ...updatedField })
@@ -31,18 +33,23 @@ const Search = props => {
     setClicked(true)
     const fetchData = async () => {
       const res = await axios({
-        method: 'GET', url: apiUrl + '/profiles', params: { profile }
-      }); setData(await res.data)
-    }; fetchData().catch((err) => console.log(err))
+        method: 'GET',
+        url: apiUrl + '/profiles',
+        params: { profile }
+      })
+      setData(await res.data)
+    }
+    fetchData().catch((err) => console.log(err))
   }
   const search = <span><FaSearch/>  Search for local musicians</span>
   const searchForm = (
     <Fragment>
-      <h1 className="brand-name text-center">musicman</h1>
+      <h1 className="brand-name text-center" onClick={resetSearch}>musicman</h1>
       <p className="text-center small-text bold">A place for musicians to connect for music lessons, gigs, or jams.
       </p>
-      <Form onSubmit={handleSubmit}><Instruments change={handleChange}/>
-        <Interests change={handleChange}/>
+      <Form onSubmit={handleSubmit}>
+        <br/><Interests change={handleChange} interest={profile.interest}/><br/>
+        <Instruments change={handleChange}/>
         <State change={handleChange} state={profile.state}/>
         <City change={handleChange} city={profile.city}/>
         <Button type="Submit" variant="info btn-block">{

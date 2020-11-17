@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Card, Button, Accordion } from 'react-bootstrap'
-import ReviewPost from '../../Review/ReviewPost'
-import ReviewPatch from '../../Review/ReviewPatch'
-import Star from '../../Review/Star'
+import ReviewPost from '../Review/ReviewPost'
+import ReviewPatch from '../Review/ReviewPatch'
+import Star from '../Review/Star'
 import { FaUserEdit } from 'react-icons/fa'
 
 const ProfileCard = props => {

@@ -1,16 +1,29 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
-const Interests = props => {
+const Interests = ({ interest, change }) => {
+  const radios = [
+    { name: 'Lessons', value: 'Lessons' },
+    { name: 'Gigs', value: 'Gigs' },
+    { name: 'Jams', value: 'Jams' }
+  ]
+
   return (
-    <Form.Group controlId="interest">
-      <Form.Control as="select" name="interest" onChange={props.change}>
-        <option>Interest</option>
-        <option>Lessons</option>
-        <option>Jams</option>
-        <option>Gigs</option>
-      </Form.Control>
-    </Form.Group>
+    <ButtonGroup toggle className="d-flex">
+      {radios.map((radio, i) => (
+        <ToggleButton
+          key={i}
+          type="radio"
+          variant={i === 0 ? 'primary' : i === 1 ? 'danger' : i === 2 ? 'success' : null}
+          name="interest"
+          value={radio.value}
+          onChange={change}
+          checked={interest === radio.value}
+        >
+          {radio.name}
+        </ToggleButton>
+      ))}
+    </ButtonGroup>
   )
 }
 

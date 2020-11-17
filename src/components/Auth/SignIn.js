@@ -18,12 +18,10 @@ class SignIn extends Component {
     e.preventDefault()
     this.setState({ clicked: true })
     const { msgAlert, history, setUser } = this.props
-    signIn(this.state).then(res => setUser(res.data.user)).then(() => {
-      msgAlert({
-        heading: 'Sign In Success',
-        message: m.signIn,
-        variant: 'success'
-      })
+    signIn(this.state).then(res => {
+      setUser(res.data.user)
+      const firstName = res.data.user.name.substr(0, res.data.user.name.indexOf(' '))
+      msgAlert({ heading: `Hi ${firstName}!`, message: m.signIn, variant: 'success' })
       history.push('/')
     }).catch(e => {
       this.setState({ email: '', password: '', clicked: false })

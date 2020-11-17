@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 
 const State = props => {
   return (
-    <Form.Group controlId="location">
+    <Form.Group controlId="state">
       <Form.Control as="select" name="state" onChange={props.change}>
         <option>State</option>
         <option>Alaska</option>
