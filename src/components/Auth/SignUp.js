@@ -37,13 +37,13 @@ class SignUp extends Component {
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
-              <h2 className="text-center">Sign Up</h2>
+              <h2 className="brand-sub">Sign Up</h2>
               <Form onSubmit={this.onSignUp}>
                 <Email email={email} change={this.change}/>
                 <Name name={name} change={this.change}/>
                 <Password password={password} change={this.change}/>
                 <PassConf passConf={passConf} change={this.change}/>
-                <Button variant="info btn-block" type="submit">
+                <Button className="button-group" variant="outline-info btn-block" type="submit">
                   {clicked ? <Loading/> : <span>sign up</span>}
                 </Button>
               </Form>

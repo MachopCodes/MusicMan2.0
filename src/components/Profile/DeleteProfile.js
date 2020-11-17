@@ -21,7 +21,14 @@ const DeleteProfile = props => {
         variant: 'danger'
       }))
   }
-  return <Button variant="danger btn-block" onClick={handleSubmit}><FaTrash/></Button>
+  return (
+    <Button
+      className="button-group"
+      variant="outline-danger btn-block"
+      onClick={handleSubmit}>
+      <FaTrash/> Delete Profile
+    </Button>
+  )
 }
 
 export default withRouter(DeleteProfile)

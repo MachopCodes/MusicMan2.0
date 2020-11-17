@@ -22,7 +22,7 @@ const Settings = props => {
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
-              <h4 className="text-center">Account</h4><br/>
+              <h4 className="brand-sub">Account</h4><br/>
               <Card>
                 <Card.Body>
                   <Card.Text className="text-center">Email Address: {user.email}</Card.Text>
@@ -35,7 +35,9 @@ const Settings = props => {
           <Row><Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">{jsx}</Col></Row>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
-              <Link to="/profiles"><Button variant="primary btn-block"><FaUserPlus/>Create New Profile</Button></Link>
+              <Button href="#/profiles" className="button-group" variant="outline-primary btn-block">
+                <FaUserPlus/> Create New Profile
+              </Button>
             </Col>
           </Row>
         </Container>

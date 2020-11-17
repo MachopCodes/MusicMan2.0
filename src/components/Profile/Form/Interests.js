@@ -9,12 +9,12 @@ const Interests = ({ interest, change }) => {
   ]
 
   return (
-    <ButtonGroup toggle className="d-flex">
+    <ButtonGroup toggle className="button-group d-flex">
       {radios.map((radio, i) => (
         <ToggleButton
           key={i}
           type="radio"
-          variant={i === 0 ? 'primary' : i === 1 ? 'danger' : i === 2 ? 'success' : null}
+          variant={`outline-${i === 0 ? 'primary' : i === 1 ? 'danger' : i === 2 ? 'success' : null}`}
           name="interest"
           value={radio.value}
           onChange={change}

@@ -6,9 +6,12 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 class ChangePassword extends Component {
   constructor () {
-    super(); this.state = { oldPassword: '', newPassword: '' }
-  }; handleChange = e => this.setState({ [e.target.name]: e.target.value }); onChangePassword = e => {
-    e.preventDefault(); const { msgAlert, history, user } = this.props
+    super()
+    this.state = { oldPassword: '', newPassword: '' }
+  }
+  handleChange = e => this.setState({ [e.target.name]: e.target.value }); onChangePassword = e => {
+    e.preventDefault()
+    const { msgAlert, history, user } = this.props
     changePassword(this.state, user).then(() => msgAlert({
       heading: 'Change Password Success', message: m.changePass, variant: 'success'
     })).then(() => history.push('/')).catch(e => {
@@ -17,13 +20,14 @@ class ChangePassword extends Component {
         heading: 'Change Password Failed with error: ' + e.message, message: m.changePassFail, variant: 'danger'
       })
     })
-  }; render () {
+  }
+  render () {
     return (
       <section>
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
-              <h2 className="text-center">Sign In</h2>
+              <h2 className="brand-sub">change password</h2>
               <Form onSubmit={this.onChangePassword}>
                 <Form.Group controlId="oldPassword">
                   <Form.Control
@@ -45,7 +49,7 @@ class ChangePassword extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Group>
-                <Button variant="info btn-block" type="submit">Change Password</Button>
+                <Button className="button-group" variant="outline-info btn-block" type="submit">Change Password</Button>
               </Form>
             </Col>
           </Row>

@@ -34,13 +34,14 @@ const CreateProfile = ({ user, msgAlert, history }) => {
       <Container>
         <Row>
           <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
+            <h4 className="brand-sub">Create Profile</h4>
             <Form onSubmit={handleSubmit}>
+              <br/><Interests change={handleChange}/><br/>
               <City city={profile.city} change={handleChange}/>
               <State state={profile.state} change={handleChange}/>
               <Instruments change={handleChange}/>
-              <Interests change={handleChange}/>
               <Blurb blurb={profile.blurb} change={handleChange}/>
-              <Button type="Submit" variant="primary btn-block"><FaUserPlus/> Create Profile</Button>
+              <Button className="button-group" type="Submit" variant="outline-primary btn-block"><FaUserPlus/> Create Profile</Button>
             </Form>
           </Col>
         </Row>

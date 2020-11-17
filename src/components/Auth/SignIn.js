@@ -40,11 +40,11 @@ class SignIn extends Component {
         <Container>
           <Row>
             <Col xl={4} lg={6} md={8} sm={10} xs={12} className="mx-auto">
-              <h2 className="text-center">Sign In</h2>
+              <h2 className="brand-sub">sign in</h2><br/>
               <Form onSubmit={this.onSignIn}>
                 <Email email={email} change={this.handleChange}/>
                 <Password password={password} change={this.handleChange}/>
-                <Button variant="info btn-block" type="submit">
+                <Button className="button-group" variant="outline-info btn-block" type="submit">
                   {clicked ? <Loading/> : <span>sign in</span>}
                 </Button>
               </Form><br/>

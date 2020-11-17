@@ -29,6 +29,18 @@ input[type="radio"] {
               5px 5px 0px #052939,
 }
 
+.brand-sub {
+  font-size: 2rem;
+	text-align: center;
+  color: black;
+  font-weight: 1000;
+  text-shadow: .5px .5px 0px #eb452b,
+              .75px .75px 0px #efa032,
+              1px 1px 0px #46b59b,
+              1.25px 1.25px 0px #017e7f,
+              2px 2px 0px #052939,
+}
+
 .brand-nav {
   font-size: 1.2rem;
   text-align: center;
@@ -46,58 +58,49 @@ input[type="radio"] {
   width: 25%;
   height: 25%;
 }
-
 .logo-img {
   width: 30px;
   height: 30px;
 }
-
+.button-group {
+  background-color: white;
+}
 .myaccordion {
   border-bottom-color: #EDEFF0;
   background: transparent;
 }
-
 .star {
   cursor: pointer;
   transition: color 200ms;
 }
-
-
-
 @media (min-width: 275px) {
   .navbar-expand-md .navbar-nav {
       flex-direction: row;
   }
 }
-
 @media (min-width: 275px) {
   .navbar-expand-md .navbar-nav .nav-link {
       padding-right: 0.5rem;
       padding-left: 0.5rem;
   }
 }
-
-
-
 .sign-in:hover {
   color: LimeGreen !important;
 }
-
 .search:hover {
-  color: DarkTurquoise !important;
+  color: DarkGreen !important;
 }
-
 .settings:hover {
   color: Indigo !important;
 }
-
 .sign-out:hover {
   color: IndianRed !important;
 }
-
-
 .text-right {
   text-align: right;
+}
+.text-left {
+  text-align: left;
 }
 .text-center {
   text-align: center;

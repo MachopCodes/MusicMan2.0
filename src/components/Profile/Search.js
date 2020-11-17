@@ -52,7 +52,7 @@ const Search = props => {
         <Instruments change={handleChange}/>
         <State change={handleChange} state={profile.state}/>
         <City change={handleChange} city={profile.city}/>
-        <Button type="Submit" variant="info btn-block">{
+        <Button className="button-group" type="Submit" variant="outline-info btn-block">{
           clicked ? data ? search : <Loading/> : search
         }</Button>
       </Form>
