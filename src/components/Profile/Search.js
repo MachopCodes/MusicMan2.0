@@ -60,7 +60,7 @@ const Search = props => {
   )
   let card
   data
-    ? data.profiles.length > 1
+    ? data.profiles.length >= 1
       ? card = <ProfileCard {...props} list={data.profiles} setReceiver={props.setReceiver}/>
       : card = (
         <Fragment>

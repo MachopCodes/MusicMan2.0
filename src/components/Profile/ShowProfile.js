@@ -10,7 +10,8 @@ const ShowProfile = props => {
   const fetchData = async () => {
     const response = await axios({ method: 'GET', url: apiUrl + '/profiles/' + match.params.id })
     setData(await response.data)
-  }; useEffect(() => {
+  }
+  useEffect(() => {
     fetchData().catch(e => {
       msgAlert({ heading: 'Edit Failure: ' + e.message, message: m.profGetFail, variant: 'danger' })
     })
