@@ -23,7 +23,8 @@ const CreateProfile = ({ user, msgAlert, history }) => {
         heading: 'Profile Created!',
         message: m.profPost,
         variant: 'success'
-      }); history.push('/')
+      })
+      history.push('/')
     }).catch(e => msgAlert({
       heading: 'Profile Create Failed: ' + e.message,
       message: m.profPostFail,
