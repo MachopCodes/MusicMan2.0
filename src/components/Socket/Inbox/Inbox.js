@@ -8,7 +8,8 @@ import './Inbox.css'
 const Inbox = props => {
   const { user, setUser, msgAlert } = props
   const handleClick = e => {
-    e.preventDefault(); deleteMessage(e.currentTarget.value, user).then(() => {
+    e.preventDefault()
+    deleteMessage(e.currentTarget.value, user).then(() => {
       getUser(user._id).then(res => setUser(res.data.user))
     }).catch(event => msgAlert({
       heading: 'Failed to delete: ' + event.message, message: m.msgDelFail, variant: 'danger'
