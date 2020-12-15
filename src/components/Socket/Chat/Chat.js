@@ -29,21 +29,29 @@ const Chat = ({ user, location, setUser, opers, setOpers }) => {
     useEffect(() => {
       socket = io(ENDPOINT)
       socket.emit('join', { name, room }, (error) => {
+        console.log('joining room')
         if (error) alert(error)
-      }); return () => socket.close()
+      })
+      return () => socket.close()
     }, [ENDPOINT, location.search])
 
     useEffect(() => {
       socket.on('message', message => {
-        const data = { name, recipient, room, message }
         setMessages(messages => [ ...messages, message ])
-        saveMessage(data).then((res) => setUser(res.data))
-      }); socket.on('roomData', ({ opers }) => setOpers(opers))
+      })
+      socket.on('roomData', ({ opers }) => setOpers(opers))
     }, [])
 
     const sendMessage = (e) => {
       e.preventDefault()
-      if (message) socket.emit('sendMessage', message, () => setMessage(''))
+      if (message) {
+        socket.emit('sendMessage', message, () => {
+          saveMessage(name, recipient, room, message).then((res) => {
+            setUser(res.data)
+            setMessage('')
+          })
+        })
+      }
     }
 
     return (
