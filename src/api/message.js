@@ -1,11 +1,17 @@
 import apiUrl from './config'
 import axios from 'axios'
 
-export const saveMessage = (data) => {
+export const saveMessage = (name, recipient, room, message) => {
+  const messageObject = { oper: name.trim().toLowerCase(), text: message }
   return axios({
     method: 'POST',
     url: apiUrl + '/message',
-    data
+    data: {
+      name,
+      recipient,
+      room,
+      message: messageObject
+    }
   })
 }
 
