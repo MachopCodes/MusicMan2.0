@@ -11,15 +11,22 @@ const ReviewPatch = props => {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-  const [r, setR] = useState({ content: review.content, rating: review.rating, profileId: profileId })
+  const [r, setR] = useState({
+    content: review.content, rating: review.rating, profileId: profileId
+  })
   const handleChange = e => {
     const updatedField = { [e.target.name]: e.target.value }
     setR({ ...r, ...updatedField })
   }
   const handleSubmit = e => {
-    e.preventDefault(); editReview(r, review._id, user.token).then(() => {
-      msgAlert({ heading: 'Review Edited!', message: m.reviewPatch, variant: 'success' }); handleClose(); history.push('/')
-    }).catch(e => msgAlert({ heading: 'Review Edit Failed: ' + e.message, message: m.reviewPatchFail, variant: 'danger' }))
+    e.preventDefault()
+    editReview(r, review._id, user.token).then(() => {
+      msgAlert({ heading: 'Review Edited!', message: m.reviewPatch, variant: 'success' })
+      handleClose()
+      history.push('/')
+    }).catch(e => msgAlert({
+      heading: 'Review Edit Failed: ' + e.message, message: m.reviewPatchFail, variant: 'danger'
+    }))
   }
   if (user && user._id === review.reviewerId) {
     return (

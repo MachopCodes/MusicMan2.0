@@ -12,13 +12,20 @@ const ReviewPost = props => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
     const [review, setReview] = useState({
-      content: '', rating: null, profileId: profile._id, reviewerName: user.name, reviewerId: user._id
+      content: '',
+      rating: null,
+      profileId: profile._id,
+      reviewerName: user.name,
+      reviewerId: user._id
     })
+
     const handleChange = e => setReview({ ...review, ...{ [e.target.name]: e.target.value } })
     const handleSubmit = e => {
-      e.preventDefault(); createReview(review, user.token).then(() => {
+      e.preventDefault()
+      createReview(review, user.token).then(() => {
         msgAlert({ heading: 'Review Created!', message: m.reviewPost, variant: 'success' })
         handleClose()
+        console.log('inside handlesubmit, props.history is', props.history)
       }).catch(e => msgAlert({
         heading: 'Error: ' + e.message, message: m.reviewPostFail, variant: 'danger'
       }))
