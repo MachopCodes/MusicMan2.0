@@ -11,7 +11,7 @@ import City from './Form/City'
 import { FaUserEdit } from 'react-icons/fa'
 
 const EditProfile = props => {
-  const { msgAlert, p, _id, user } = props
+  const { msgAlert, p, user, history } = props
   const [profile, setProfile] = useState({
     city: p.city,
     state: p.state,
@@ -26,7 +26,7 @@ const EditProfile = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    editProfile(profile, _id, user.token).then(() => {
+    editProfile(profile, p._id, user.token).then(() => {
       msgAlert({
         heading: 'Edit Success',
         message: m.profPatch,

@@ -20,6 +20,7 @@ export const getProfile = id => {
 }
 
 export const editProfile = (data, id, token) => {
+  console.log('sending an edit with id: ', id)
   return axios({
     method: 'PATCH',
     url: apiUrl + '/profiles/' + id,

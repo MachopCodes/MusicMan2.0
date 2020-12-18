@@ -18,7 +18,7 @@ const ShowProfile = props => {
   }, []); return (
     <div>
       {data.profile
-        ? <EditProfile p={data.profile} msgAlert={msgAlert} user={user}/>
+        ? <EditProfile {...props} p={data.profile} msgAlert={msgAlert} user={user}/>
         : <span><Loading/></span>}
     </div>
   )
