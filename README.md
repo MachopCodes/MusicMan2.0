@@ -1,5 +1,5 @@
 # MusicMan2.0
-MusicMan2.0 is a remake of Music Man with React. The main additions to the application include a search, reviews and messaging. To make a fully functioning app, it needed to allow users to search profiles by criteria, post reviews on different users and for users to message other users - because an application wouldn't be complete if users had to resort to their emails. 
+I built musicman because I wanted to give musicians a platform to network and reach out to others for music lessons. The main additions to the application include a search, reviews and messaging. To make a fully functioning app, it needed to allow users to search profiles by criteria, post reviews on different users and for users to message other users - because an application wouldn't be complete if users had to resort to their emails. 
 
 **[Deployed Server Application](https://MusicMan2.0-Server.herokuapp.com/)** |
 **[Server Repository](https://github.com/MachopCodes/MusicMan2.0-Server)** |
